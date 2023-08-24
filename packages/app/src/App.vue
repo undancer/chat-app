@@ -1,7 +1,9 @@
+<!--
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
 </script>
-
+-->
+<!--
 <template>
   <div>
     <a href="https://vitejs.dev" target="_blank">
@@ -13,7 +15,8 @@ import HelloWorld from './components/HelloWorld.vue'
   </div>
   <HelloWorld msg="Vite + Vue" />
 </template>
-
+-->
+<!--
 <style scoped>
 .logo {
   height: 6em;
@@ -28,3 +31,9 @@ import HelloWorld from './components/HelloWorld.vue'
   filter: drop-shadow(0 0 2em #42b883aa);
 }
 </style>
+-->
+<template>
+  <div>
+    app
+  </div>
+</template>
