@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { storeToRefs, useCounterStore } from '../stores'
 
 defineProps<{ msg: string }>()
 
-const count = ref(0)
+const counterStore = useCounterStore()
+
+const { count } = storeToRefs(counterStore)
+const { increment } = counterStore
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
 
   <div class="card">
-    <button type="button" @click="count++">
+    <button type="button" @click="increment">
       count is {{ count }}
     </button>
     <p>
