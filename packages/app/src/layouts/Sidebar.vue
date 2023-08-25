@@ -1,24 +1,24 @@
-<script lang="ts">
+<script lang="ts" setup>
+import {
+  Brush,
+  ChatLineSquare,
+  Help,
+  House,
+  Link,
+  Share,
+} from '@element-plus/icons-vue'
+import { useRoute } from 'vue-router'
 import i18n from '../languages'
 
-export default {
-  name: 'Sidebar',
-  data() {
-    return {
-      LOCALES: [
-        { locale: 'zh', name: '中文' },
-        { locale: 'ja', name: '日本語' },
-        { locale: 'en', name: 'English' },
-      ],
-    }
-  },
-  methods: {
-    onSelectLanguage(locale: string) {
-      // i18n..setLocale(locale)
-      i18n.global.locale = locale
-    },
-  },
+const LOCALES = [
+  { locale: 'zh', name: '中文' },
+  { locale: 'ja', name: '日本語' },
+  { locale: 'en', name: 'English' },
+]
+function onSelectLanguage(locale: string) {
+  i18n.global.locale = locale
 }
+const $route = useRoute()
 </script>
 
 <template>
