@@ -1,6 +1,6 @@
 import { createPinia } from 'pinia'
 
-export { useCounterStore } from './counter'
+export { useCounterStore } from './counter.ts'
 
 export {
   storeToRefs,
