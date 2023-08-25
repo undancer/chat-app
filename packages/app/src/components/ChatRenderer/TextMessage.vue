@@ -1,6 +1,6 @@
-<script>
-import ImgShadow from './ImgShadow'
-import AuthorChip from './AuthorChip'
+<script lang="ts">
+import ImgShadow from './ImgShadow.vue'
+import AuthorChip from './AuthorChip.vue'
 import * as constants from './constants'
 import * as utils from '@/utils'
 

@@ -1,5 +1,5 @@
-<script>
-import * as i18n from '@/i18n'
+<script lang="ts">
+import * as i18n from '../plugins/i18n/legacy.ts'
 
 export default {
   name: 'Sidebar',

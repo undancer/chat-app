@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import * as avatar from '@/api/chat/avatar'
 
 export default {

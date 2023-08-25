@@ -1,5 +1,5 @@
-<script>
-import AuthorBadge from './AuthorBadge'
+<script lang="ts">
+import AuthorBadge from './AuthorBadge.vue'
 import * as constants from './constants'
 
 export default {

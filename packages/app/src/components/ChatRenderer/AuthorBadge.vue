@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import * as constants from './constants'
 
 export default {

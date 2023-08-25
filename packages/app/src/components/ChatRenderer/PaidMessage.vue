@@ -1,5 +1,5 @@
-<script>
-import ImgShadow from './ImgShadow'
+<script lang="ts">
+import ImgShadow from './ImgShadow.vue'
 import * as constants from './constants'
 import * as utils from '@/utils'
 

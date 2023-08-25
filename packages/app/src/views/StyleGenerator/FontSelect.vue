@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import * as fonts from './fonts'
 
 export default {

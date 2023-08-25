@@ -1,5 +1,5 @@
-<script>
-import Sidebar from './Sidebar'
+<script lang="ts">
+import Sidebar from './Sidebar.vue'
 
 export default {
   name: 'Layout',
@@ -8,8 +8,8 @@ export default {
   },
   data() {
     return {
-      APP_VERSION: process.env.APP_VERSION,
-
+      // APP_VERSION: process.env.APP_VERSION,
+      APP_VERSION: 'dev?',
       isMobile: false,
       hideSidebar: true,
     }

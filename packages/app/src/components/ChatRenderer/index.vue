@@ -1,8 +1,8 @@
-<script>
-import Ticker from './Ticker'
-import TextMessage from './TextMessage'
-import MembershipItem from './MembershipItem'
-import PaidMessage from './PaidMessage'
+<script lang="ts">
+import Ticker from './Ticker.vue'
+import TextMessage from './TextMessage.vue'
+import MembershipItem from './MembershipItem.vue'
+import PaidMessage from './PaidMessage.vue'
 import * as constants from './constants'
 import * as chatConfig from '@/api/chatConfig'
 

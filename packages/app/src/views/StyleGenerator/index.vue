@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
 import _ from 'lodash'
 
-import Legacy from './Legacy'
-import LineLike from './LineLike'
-import Room from '@/views/Room'
+import Legacy from './Legacy.vue'
+import LineLike from './LineLike.vue'
+import Room from '@/views/Room.vue'
 
 export default {
   name: 'StyleGenerator',

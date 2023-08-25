@@ -1,7 +1,7 @@
-<script>
-import ImgShadow from './ImgShadow'
-import MembershipItem from './MembershipItem'
-import PaidMessage from './PaidMessage'
+<script lang="ts">
+import ImgShadow from './ImgShadow.vue'
+import MembershipItem from './MembershipItem.vue'
+import PaidMessage from './PaidMessage.vue'
 import * as constants from './constants'
 import { formatCurrency } from '@/utils'
 import * as chatConfig from '@/api/chatConfig'
