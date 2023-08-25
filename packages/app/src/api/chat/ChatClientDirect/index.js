@@ -1,8 +1,8 @@
 import axios from 'axios'
 
+import * as avatar from '../avatar'
 import { BrotliDecode } from './brotli_decode'
 import { getUuid4Hex } from '@/utils'
-import * as avatar from '../avatar'
 
 const HEADER_SIZE = 16
 
@@ -39,8 +39,8 @@ const AUTH_REPLY_CODE_OK = 0
 const HEARTBEAT_INTERVAL = 10 * 1000
 const RECEIVE_TIMEOUT = HEARTBEAT_INTERVAL + (5 * 1000)
 
-let textEncoder = new TextEncoder()
-let textDecoder = new TextDecoder()
+const textEncoder = new TextEncoder()
+const textDecoder = new TextDecoder()
 
 export default class ChatClientDirect {
   constructor(roomId) {
@@ -48,7 +48,7 @@ export default class ChatClientDirect {
     this.roomId = roomId
     this.roomOwnerUid = 0
     this.hostServerList = [
-      { host: "broadcastlv.chat.bilibili.com", port: 2243, wss_port: 443, ws_port: 2244 }
+      { host: 'broadcastlv.chat.bilibili.com', port: 2243, wss_port: 443, ws_port: 2244 },
     ]
 
     this.onAddText = null
@@ -80,9 +80,11 @@ export default class ChatClientDirect {
   async initRoom() {
     let res
     try {
-      res = (await axios.get('/api/room_info', { params: {
-        roomId: this.roomId
-      } })).data
+      res = (await axios.get('/api/room_info', {
+        params: {
+          roomId: this.roomId,
+        },
+      })).data
     } catch {
       return
     }
@@ -94,24 +96,24 @@ export default class ChatClientDirect {
   }
 
   makePacket(data, operation) {
-    let body = textEncoder.encode(JSON.stringify(data))
-    let header = new ArrayBuffer(HEADER_SIZE)
-    let headerView = new DataView(header)
-    headerView.setUint32(0, HEADER_SIZE + body.byteLength)   // pack_len
-    headerView.setUint16(4, HEADER_SIZE)                     // raw_header_size
-    headerView.setUint16(6, 1)                               // ver
-    headerView.setUint32(8, operation)                       // operation
-    headerView.setUint32(12, 1)                              // seq_id
+    const body = textEncoder.encode(JSON.stringify(data))
+    const header = new ArrayBuffer(HEADER_SIZE)
+    const headerView = new DataView(header)
+    headerView.setUint32(0, HEADER_SIZE + body.byteLength) // pack_len
+    headerView.setUint16(4, HEADER_SIZE) // raw_header_size
+    headerView.setUint16(6, 1) // ver
+    headerView.setUint32(8, operation) // operation
+    headerView.setUint32(12, 1) // seq_id
     return new Blob([header, body])
   }
 
   sendAuth() {
-    let authParams = {
+    const authParams = {
       uid: this.roomOwnerUid,
       roomid: this.roomId,
       protover: 3,
       platform: 'web',
-      type: 2
+      type: 2,
     }
     this.websocket.send(this.makePacket(authParams, OP_AUTH))
   }
@@ -120,7 +122,7 @@ export default class ChatClientDirect {
     if (this.isDestroying) {
       return
     }
-    let hostServer = this.hostServerList[this.retryCount % this.hostServerList.length]
+    const hostServer = this.hostServerList[this.retryCount % this.hostServerList.length]
     const url = `wss://${hostServer.host}:${hostServer.wss_port}/sub`
     this.websocket = new WebSocket(url)
     this.websocket.binaryType = 'arraybuffer'
@@ -189,7 +191,7 @@ export default class ChatClientDirect {
       return
     }
 
-    let data = new Uint8Array(event.data)
+    const data = new Uint8Array(event.data)
     this.parseWsMessage(data)
 
     // 至少成功处理1条消息
@@ -202,93 +204,93 @@ export default class ChatClientDirect {
     let packLen = dataView.getUint32(0)
     let rawHeaderSize = dataView.getUint16(4)
     // let ver = dataView.getUint16(6)
-    let operation = dataView.getUint32(8)
+    const operation = dataView.getUint32(8)
     // let seqId = dataView.getUint32(12)
 
     switch (operation) {
-    case OP_AUTH_REPLY:
-    case OP_SEND_MSG_REPLY: {
+      case OP_AUTH_REPLY:
+      case OP_SEND_MSG_REPLY: {
       // 业务消息，可能有多个包一起发，需要分包
-      while (true) { // eslint-disable-line no-constant-condition
-        let body = new Uint8Array(data.buffer, offset + rawHeaderSize, packLen - rawHeaderSize)
-        this.parseBusinessMessage(dataView, body)
+        while (true) {
+          const body = new Uint8Array(data.buffer, offset + rawHeaderSize, packLen - rawHeaderSize)
+          this.parseBusinessMessage(dataView, body)
 
-        offset += packLen
-        if (offset >= data.byteLength) {
-          break
+          offset += packLen
+          if (offset >= data.byteLength) {
+            break
+          }
+
+          dataView = new DataView(data.buffer, offset)
+          packLen = dataView.getUint32(0)
+          rawHeaderSize = dataView.getUint16(4)
         }
-
-        dataView = new DataView(data.buffer, offset)
-        packLen = dataView.getUint32(0)
-        rawHeaderSize = dataView.getUint16(4)
+        break
       }
-      break
-    }
-    case OP_HEARTBEAT_REPLY: {
+      case OP_HEARTBEAT_REPLY: {
       // 服务器心跳包，包含人气值，这里没用
-      break
-    }
-    default: {
+        break
+      }
+      default: {
       // 未知消息
-      let body = new Uint8Array(data.buffer, offset + rawHeaderSize, packLen - rawHeaderSize)
-      console.warn('未知包类型，operation=', operation, dataView, body)
-      break
-    }
+        const body = new Uint8Array(data.buffer, offset + rawHeaderSize, packLen - rawHeaderSize)
+        console.warn('未知包类型，operation=', operation, dataView, body)
+        break
+      }
     }
   }
 
   parseBusinessMessage(dataView, body) {
-    let ver = dataView.getUint16(6)
-    let operation = dataView.getUint32(8)
+    const ver = dataView.getUint16(6)
+    const operation = dataView.getUint32(8)
 
     switch (operation) {
-    case OP_SEND_MSG_REPLY: {
+      case OP_SEND_MSG_REPLY: {
       // 业务消息
-      if (ver == WS_BODY_PROTOCOL_VERSION_BROTLI) {
+        if (ver == WS_BODY_PROTOCOL_VERSION_BROTLI) {
         // 压缩过的先解压
-        body = BrotliDecode(body)
-        this.parseWsMessage(body)
-      } else {
+          body = BrotliDecode(body)
+          this.parseWsMessage(body)
+        } else {
         // 没压缩过的直接反序列化
-        if (body.length !== 0) {
-          try {
-            body = JSON.parse(textDecoder.decode(body))
-            this.handlerCommand(body)
-          } catch (e) {
-            console.error('body=', body)
-            throw e
+          if (body.length !== 0) {
+            try {
+              body = JSON.parse(textDecoder.decode(body))
+              this.handlerCommand(body)
+            } catch (e) {
+              console.error('body=', body)
+              throw e
+            }
           }
         }
+        break
       }
-      break
-    }
-    case OP_AUTH_REPLY: {
+      case OP_AUTH_REPLY: {
       // 认证响应
-      body = JSON.parse(textDecoder.decode(body))
-      if (body.code !== AUTH_REPLY_CODE_OK) {
-        console.error('认证响应错误，body=', body)
-        // 这里应该重新获取token再重连的，但前端没有用到token，所以不重新init了
-        this.discardWebsocket()
-        throw new Error('认证响应错误')
+        body = JSON.parse(textDecoder.decode(body))
+        if (body.code !== AUTH_REPLY_CODE_OK) {
+          console.error('认证响应错误，body=', body)
+          // 这里应该重新获取token再重连的，但前端没有用到token，所以不重新init了
+          this.discardWebsocket()
+          throw new Error('认证响应错误')
+        }
+        this.sendHeartbeat()
+        break
       }
-      this.sendHeartbeat()
-      break
-    }
-    default: {
+      default: {
       // 未知消息
-      console.warn('未知包类型，operation=', operation, dataView, body)
-      break
-    }
+        console.warn('未知包类型，operation=', operation, dataView, body)
+        break
+      }
     }
   }
 
   handlerCommand(command) {
     let cmd = command.cmd || ''
-    let pos = cmd.indexOf(':')
+    const pos = cmd.indexOf(':')
     if (pos != -1) {
       cmd = cmd.substr(0, pos)
     }
-    let callback = CMD_CALLBACK_MAP[cmd]
+    const callback = CMD_CALLBACK_MAP[cmd]
     if (callback) {
       callback.call(this, command)
     }
@@ -298,7 +300,7 @@ export default class ChatClientDirect {
     if (!this.onAddText) {
       return
     }
-    let info = command.info
+    const info = command.info
 
     let roomId, medalLevel
     if (info[3]) {
@@ -308,9 +310,9 @@ export default class ChatClientDirect {
       roomId = medalLevel = 0
     }
 
-    let uid = info[2][0]
-    let isAdmin = info[2][2]
-    let privilegeType = info[7]
+    const uid = info[2][0]
+    const isAdmin = info[2][2]
+    const privilegeType = info[7]
     let authorType
     if (uid === this.roomOwnerUid) {
       authorType = 3
@@ -322,13 +324,13 @@ export default class ChatClientDirect {
       authorType = 0
     }
 
-    let data = {
+    const data = {
       avatarUrl: await avatar.getAvatarUrl(uid),
       timestamp: info[0][4] / 1000,
       authorName: info[2][1],
-      authorType: authorType,
+      authorType,
       content: info[1],
-      privilegeType: privilegeType,
+      privilegeType,
       isGiftDanmaku: Boolean(info[0][9]),
       authorLevel: info[4][0],
       isNewbie: info[2][5] < 10000,
@@ -336,7 +338,7 @@ export default class ChatClientDirect {
       medalLevel: roomId === this.roomId ? medalLevel : 0,
       id: getUuid4Hex(),
       translation: '',
-      emoticon: info[0][13].url || null
+      emoticon: info[0][13].url || null,
     }
     this.onAddText(data)
   }
@@ -357,7 +359,7 @@ export default class ChatClientDirect {
       authorName: data.uname,
       totalCoin: data.total_coin,
       giftName: data.giftName,
-      num: data.num
+      num: data.num,
     }
     this.onAddGift(data)
   }
@@ -373,7 +375,7 @@ export default class ChatClientDirect {
       avatarUrl: await avatar.getAvatarUrl(data.uid),
       timestamp: data.start_time,
       authorName: data.username,
-      privilegeType: data.guard_level
+      privilegeType: data.guard_level,
     }
     this.onAddMember(data)
   }
@@ -391,7 +393,7 @@ export default class ChatClientDirect {
       authorName: data.user_info.uname,
       price: data.price,
       content: data.message,
-      translation: ''
+      translation: '',
     }
     this.onAddSuperChat(data)
   }
@@ -401,8 +403,8 @@ export default class ChatClientDirect {
       return
     }
 
-    let ids = []
-    for (let id of command.data.ids) {
+    const ids = []
+    for (const id of command.data.ids) {
       ids.push(id.toString())
     }
     this.onDelSuperChat({ ids })
@@ -414,5 +416,5 @@ const CMD_CALLBACK_MAP = {
   SEND_GIFT: ChatClientDirect.prototype.sendGiftCallback,
   GUARD_BUY: ChatClientDirect.prototype.guardBuyCallback,
   SUPER_CHAT_MESSAGE: ChatClientDirect.prototype.superChatMessageCallback,
-  SUPER_CHAT_MESSAGE_DELETE: ChatClientDirect.prototype.superChatMessageDeleteCallback
+  SUPER_CHAT_MESSAGE_DELETE: ChatClientDirect.prototype.superChatMessageDeleteCallback,
 }

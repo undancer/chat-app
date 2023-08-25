@@ -2,7 +2,7 @@ export const LOCAL_FONTS = [
   'sans-serif', 'serif', 'Tahoma', 'Arial', 'Verdana',
   'Microsoft YaHei', 'Microsoft JhengHei', 'SimHei', 'SimSun', 'FangSong', // Windows
   'Helvetica', 'PingFang SC', 'Hiragino Sans GB', // Mac
-  'WenQuanYi Micro Hei' // Linux
+  'WenQuanYi Micro Hei', // Linux
 ]
 
 // https://fonts.google.com/

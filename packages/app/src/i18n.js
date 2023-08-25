@@ -4,15 +4,15 @@ import VueI18n from 'vue-i18n'
 import zh from '@/lang/zh'
 
 let lastSetLocale = 'zh'
-let loadedLocales = ['zh']
+const loadedLocales = ['zh']
 
 Vue.use(VueI18n)
 
 export async function setLocale(locale) {
   lastSetLocale = locale
-  if (loadedLocales.indexOf(locale) === -1) {
+  if (!loadedLocales.includes(locale)) {
     // eslint-disable-next-line prefer-template
-    let langModule = await import('@/lang/' + locale)
+    const langModule = await import('@/lang/' + locale)
     i18n.setLocaleMessage(locale, langModule.default)
     loadedLocales.push(locale)
 
@@ -28,14 +28,14 @@ export const i18n = new VueI18n({
   locale: 'zh',
   fallbackLocale: 'zh',
   messages: {
-    zh
-  }
+    zh,
+  },
 })
 
 function getDefaultLocale() {
   let locale = window.localStorage.lang
   if (!locale) {
-    let lang = navigator.language
+    const lang = navigator.language
     if (lang.startsWith('zh')) {
       locale = 'zh'
     } else if (lang.startsWith('ja')) {

@@ -1,7 +1,3 @@
-<template>
-  <chat-renderer ref="renderer" :maxNumber="config.maxNumber" :showGiftName="config.showGiftName"></chat-renderer>
-</template>
-
 <script>
 import * as i18n from '@/i18n'
 import { mergeConfig, toBool, toInt } from '@/utils'
@@ -17,30 +13,30 @@ import * as constants from '@/components/ChatRenderer/constants'
 export default {
   name: 'Room',
   components: {
-    ChatRenderer
+    ChatRenderer,
   },
   props: {
     roomId: {
       type: Number,
-      default: null
+      default: null,
     },
     strConfig: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data() {
     return {
       config: chatConfig.deepCloneDefaultConfig(),
       chatClient: null,
-      pronunciationConverter: null
+      pronunciationConverter: null,
     }
   },
   computed: {
     blockKeywordsTrie() {
-      let blockKeywords = this.config.blockKeywords.split('\n')
-      let res = new trie.Trie()
-      for (let keyword of blockKeywords) {
+      const blockKeywords = this.config.blockKeywords.split('\n')
+      const res = new trie.Trie()
+      for (const keyword of blockKeywords) {
         if (keyword !== '') {
           res.set(keyword, true)
         }
@@ -48,9 +44,9 @@ export default {
       return res
     },
     blockUsersTrie() {
-      let blockUsers = this.config.blockUsers.split('\n')
-      let res = new trie.Trie()
-      for (let user of blockUsers) {
+      const blockUsers = this.config.blockUsers.split('\n')
+      const res = new trie.Trie()
+      for (const user of blockUsers) {
         if (user !== '') {
           res.set(user, true)
         }
@@ -58,14 +54,14 @@ export default {
       return res
     },
     emoticonsTrie() {
-      let res = new trie.Trie()
-      for (let emoticon of this.config.emoticons) {
+      const res = new trie.Trie()
+      for (const emoticon of this.config.emoticons) {
         if (emoticon.keyword !== '' && emoticon.url !== '') {
           res.set(emoticon.keyword, emoticon)
         }
       }
       return res
-    }
+    },
   },
   mounted() {
     this.initConfig()
@@ -78,24 +74,24 @@ export default {
     // 提示用户已加载
     this.$message({
       message: 'Loaded',
-      duration: '500'
+      duration: '500',
     })
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.chatClient) {
       this.chatClient.stop()
     }
   },
   methods: {
     initConfig() {
-      let locale = this.strConfig.lang
+      const locale = this.strConfig.lang
       if (locale) {
         i18n.setLocale(locale)
       }
 
       let cfg = {}
       // 留空的使用默认值
-      for (let i in this.strConfig) {
+      for (const i in this.strConfig) {
         if (this.strConfig[i] !== '') {
           cfg[i] = this.strConfig[i]
         }
@@ -163,7 +159,7 @@ export default {
       if (!this.config.showDanmaku || !this.filterTextMessage(data) || this.mergeSimilarText(data.content)) {
         return
       }
-      let message = {
+      const message = {
         id: data.id,
         type: constants.MESSAGE_TYPE_TEXT,
         avatarUrl: data.avatarUrl,
@@ -174,7 +170,7 @@ export default {
         richContent: this.getRichContent(data),
         privilegeType: data.privilegeType,
         repeated: 1,
-        translation: data.translation
+        translation: data.translation,
       }
       this.$refs.renderer.addMessage(message)
     },
@@ -182,23 +178,23 @@ export default {
       if (!this.config.showGift) {
         return
       }
-      let price = data.totalCoin / 1000
+      const price = data.totalCoin / 1000
       if (this.mergeSimilarGift(data.authorName, price, data.giftName, data.num)) {
         return
       }
       if (price < this.config.minGiftPrice) { // 丢人
         return
       }
-      let message = {
+      const message = {
         id: data.id,
         type: constants.MESSAGE_TYPE_GIFT,
         avatarUrl: data.avatarUrl,
         time: new Date(data.timestamp * 1000),
         authorName: data.authorName,
         authorNamePronunciation: this.getPronunciation(data.authorName),
-        price: price,
+        price,
         giftName: data.giftName,
-        num: data.num
+        num: data.num,
       }
       this.$refs.renderer.addMessage(message)
     },
@@ -206,7 +202,7 @@ export default {
       if (!this.config.showGift || !this.filterNewMemberMessage(data)) {
         return
       }
-      let message = {
+      const message = {
         id: data.id,
         type: constants.MESSAGE_TYPE_MEMBER,
         avatarUrl: data.avatarUrl,
@@ -214,7 +210,7 @@ export default {
         authorName: data.authorName,
         authorNamePronunciation: this.getPronunciation(data.authorName),
         privilegeType: data.privilegeType,
-        title: this.$t('chat.membershipTitle')
+        title: this.$t('chat.membershipTitle'),
       }
       this.$refs.renderer.addMessage(message)
     },
@@ -225,7 +221,7 @@ export default {
       if (data.price < this.config.minGiftPrice) { // 丢人
         return
       }
-      let message = {
+      const message = {
         id: data.id,
         type: constants.MESSAGE_TYPE_SUPER_CHAT,
         avatarUrl: data.avatarUrl,
@@ -234,7 +230,7 @@ export default {
         price: data.price,
         time: new Date(data.timestamp * 1000),
         content: data.content.trim(),
-        translation: data.translation
+        translation: data.translation,
       }
       this.$refs.renderer.addMessage(message)
     },
@@ -269,9 +265,9 @@ export default {
       return this.filterByAuthorName(data.authorName)
     },
     filterByContent(content) {
-      let blockKeywordsTrie = this.blockKeywordsTrie
+      const blockKeywordsTrie = this.blockKeywordsTrie
       for (let i = 0; i < content.length; i++) {
-        let remainContent = content.substring(i)
+        const remainContent = content.substring(i)
         if (blockKeywordsTrie.lazyMatch(remainContent) !== null) {
           return false
         }
@@ -300,14 +296,14 @@ export default {
       return this.pronunciationConverter.getPronunciation(text)
     },
     getRichContent(data) {
-      let richContent = []
+      const richContent = []
 
       // B站官方表情
       if (data.emoticon !== null) {
         richContent.push({
           type: constants.CONTENT_TYPE_IMAGE,
           text: data.content,
-          url: data.emoticon
+          url: data.emoticon,
         })
         return richContent
       }
@@ -316,18 +312,18 @@ export default {
       if (this.config.emoticons.length === 0) {
         richContent.push({
           type: constants.CONTENT_TYPE_TEXT,
-          text: data.content
+          text: data.content,
         })
         return richContent
       }
 
       // 可能含有自定义表情，需要解析
-      let emoticonsTrie = this.emoticonsTrie
+      const emoticonsTrie = this.emoticonsTrie
       let startPos = 0
       let pos = 0
       while (pos < data.content.length) {
-        let remainContent = data.content.substring(pos)
-        let matchEmoticon = emoticonsTrie.lazyMatch(remainContent)
+        const remainContent = data.content.substring(pos)
+        const matchEmoticon = emoticonsTrie.lazyMatch(remainContent)
         if (matchEmoticon === null) {
           pos++
           continue
@@ -337,7 +333,7 @@ export default {
         if (pos !== startPos) {
           richContent.push({
             type: constants.CONTENT_TYPE_TEXT,
-            text: data.content.slice(startPos, pos)
+            text: data.content.slice(startPos, pos),
           })
         }
 
@@ -345,7 +341,7 @@ export default {
         richContent.push({
           type: constants.CONTENT_TYPE_IMAGE,
           text: matchEmoticon.keyword,
-          url: matchEmoticon.url
+          url: matchEmoticon.url,
         })
         pos += matchEmoticon.keyword.length
         startPos = pos
@@ -354,11 +350,15 @@ export default {
       if (pos !== startPos) {
         richContent.push({
           type: constants.CONTENT_TYPE_TEXT,
-          text: data.content.slice(startPos, pos)
+          text: data.content.slice(startPos, pos),
         })
       }
       return richContent
-    }
-  }
+    },
+  },
 }
 </script>
+
+<template>
+  <ChatRenderer ref="renderer" :max-number="config.maxNumber" :show-gift-name="config.showGiftName" />
+</template>

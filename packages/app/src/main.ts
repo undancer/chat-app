@@ -1,9 +1,39 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import {
-  Aside, Autocomplete, Badge, Button, ButtonGroup, Card, Col, ColorPicker, Container, Divider, Form, FormItem, Image,
-  Input, Main, Menu, MenuItem, Message, Option, OptionGroup, Radio, RadioGroup, Row, Select, Scrollbar,
-  Slider, Submenu, Switch, Table, TableColumn, TabPane, Tabs, Tooltip
+  Aside,
+  Autocomplete,
+  Badge,
+  Button,
+  ButtonGroup,
+  Card,
+  Col,
+  ColorPicker,
+  Container,
+  Divider,
+  Form,
+  FormItem,
+  Image,
+  Input,
+  Main,
+  Menu,
+  MenuItem,
+  Message,
+  Option,
+  OptionGroup,
+  Radio,
+  RadioGroup,
+  Row,
+  Scrollbar,
+  Select,
+  Slider,
+  Submenu,
+  Switch,
+  TabPane,
+  Table,
+  TableColumn,
+  Tabs,
+  Tooltip,
 } from 'element-ui'
 import axios from 'axios'
 
@@ -55,7 +85,7 @@ Vue.use(Tooltip)
 Vue.prototype.$message = Message
 
 Vue.config.ignoredElements = [
-  /^yt-/
+  /^yt-/,
 ]
 
 const router = new VueRouter({
@@ -67,33 +97,33 @@ const router = new VueRouter({
       children: [
         { path: '', component: Home },
         { path: 'stylegen', name: 'stylegen', component: StyleGenerator },
-        { path: 'help', name: 'help', component: Help }
-      ]
+        { path: 'help', name: 'help', component: Help },
+      ],
     },
     {
       path: '/room/test',
       name: 'test_room',
       component: Room,
-      props: route => ({ strConfig: route.query })
+      props: route => ({ strConfig: route.query }),
     },
     {
       path: '/room/:roomId',
       name: 'room',
       component: Room,
       props(route) {
-        let roomId = parseInt(route.params.roomId)
+        let roomId = Number.parseInt(route.params.roomId)
         if (isNaN(roomId)) {
           roomId = null
         }
         return { roomId, strConfig: route.query }
-      }
+      },
     },
-    { path: '*', component: NotFound }
-  ]
+    { path: '*', component: NotFound },
+  ],
 })
 
 new Vue({
   render: h => h(App),
   router,
-  i18n: i18n.i18n
+  i18n: i18n.i18n,
 }).$mount('#app')

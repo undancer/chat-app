@@ -1,6 +1,6 @@
+import * as avatar from './avatar'
 import { getUuid4Hex } from '@/utils'
 import * as constants from '@/components/ChatRenderer/constants'
-import * as avatar from './avatar'
 
 const NAMES = [
   '光羊',
@@ -50,7 +50,7 @@ const CONTENTS = [
   'Never gonna let you down',
   '888888888888888888888888888888',
   'I am the storm that is approaching',
-  "I can eat glass, it doesn't hurt me",
+  'I can eat glass, it doesn\'t hurt me',
   'The quick brown fox jumps over the lazy dog',
   'Farewell, ashen one. May the flame guide thee',
   'I am the bone of my sword. Steel is my body, and fire is my blood.',
@@ -59,18 +59,18 @@ const CONTENTS = [
 const EMOTICONS = [
   '/static/img/emoticons/233.png',
   '/static/img/emoticons/miaoa.png',
-  '/static/img/emoticons/lipu.png'
+  '/static/img/emoticons/lipu.png',
 ]
 
 const AUTHOR_TYPES = [
   { weight: 10, value: constants.AUTHRO_TYPE_NORMAL },
   { weight: 5, value: constants.AUTHRO_TYPE_MEMBER },
   { weight: 2, value: constants.AUTHRO_TYPE_ADMIN },
-  { weight: 1, value: constants.AUTHRO_TYPE_OWNER }
+  { weight: 1, value: constants.AUTHRO_TYPE_OWNER },
 ]
 
 function randGuardInfo() {
-  let authorType = randomChoose(AUTHOR_TYPES)
+  const authorType = randomChoose(AUTHOR_TYPES)
   let privilegeType
   if (authorType === constants.AUTHRO_TYPE_MEMBER) {
     privilegeType = randInt(1, 3)
@@ -88,11 +88,11 @@ const GIFT_INFO_LIST = [
   { giftName: '花式夸夸', totalCoin: 39000 },
   { giftName: '天空之翼', totalCoin: 100000 },
   { giftName: '摩天大楼', totalCoin: 450000 },
-  { giftName: '小电视飞船', totalCoin: 1245000 }
+  { giftName: '小电视飞船', totalCoin: 1245000 },
 ]
 
 const SC_PRICES = [
-  30, 50, 100, 200, 500, 1000
+  30, 50, 100, 200, 500, 1000,
 ]
 
 const MESSAGE_GENERATORS = [
@@ -115,10 +115,10 @@ const MESSAGE_GENERATORS = [
           medalLevel: randInt(0, 40),
           id: getUuid4Hex(),
           translation: '',
-          emoticon: null
-        }
+          emoticon: null,
+        },
       }
-    }
+    },
   },
   // 表情
   {
@@ -139,10 +139,10 @@ const MESSAGE_GENERATORS = [
           medalLevel: randInt(0, 40),
           id: getUuid4Hex(),
           translation: '',
-          emoticon: randomChoose(EMOTICONS)
-        }
+          emoticon: randomChoose(EMOTICONS),
+        },
       }
-    }
+    },
   },
   // 礼物
   {
@@ -156,10 +156,10 @@ const MESSAGE_GENERATORS = [
           avatarUrl: avatar.DEFAULT_AVATAR_URL,
           timestamp: new Date().getTime() / 1000,
           authorName: randomChoose(NAMES),
-          num: 1
-        }
+          num: 1,
+        },
       }
-    }
+    },
   },
   // SC
   {
@@ -174,10 +174,10 @@ const MESSAGE_GENERATORS = [
           authorName: randomChoose(NAMES),
           price: randomChoose(SC_PRICES),
           content: randomChoose(CONTENTS),
-          translation: ''
-        }
+          translation: '',
+        },
       }
-    }
+    },
   },
   // 新舰长
   {
@@ -190,34 +190,34 @@ const MESSAGE_GENERATORS = [
           avatarUrl: avatar.DEFAULT_AVATAR_URL,
           timestamp: new Date().getTime() / 1000,
           authorName: randomChoose(NAMES),
-          privilegeType: randInt(1, 3)
-        }
+          privilegeType: randInt(1, 3),
+        },
       }
-    }
-  }
+    },
+  },
 ]
 
 function randomChoose(nodes) {
   if (nodes.length === 0) {
     return null
   }
-  for (let node of nodes) {
+  for (const node of nodes) {
     if (node.weight === undefined || node.value === undefined) {
       return nodes[randInt(0, nodes.length - 1)]
     }
   }
 
   let totalWeight = 0
-  for (let node of nodes) {
+  for (const node of nodes) {
     totalWeight += node.weight
   }
   let remainWeight = randInt(1, totalWeight)
-  for (let node of nodes) {
+  for (const node of nodes) {
     remainWeight -= node.weight
     if (remainWeight > 0) {
       continue
     }
-    if (node.value instanceof Array) {
+    if (Array.isArray(node.value)) {
       return randomChoose(node.value)
     }
     return node.value
@@ -266,20 +266,20 @@ export default class ChatClientTest {
   onTimeout() {
     this.refreshTimer()
 
-    let { type, message } = randomChoose(MESSAGE_GENERATORS)()
+    const { type, message } = randomChoose(MESSAGE_GENERATORS)()
     switch (type) {
-    case constants.MESSAGE_TYPE_TEXT:
-      this.onAddText(message)
-      break
-    case constants.MESSAGE_TYPE_GIFT:
-      this.onAddGift(message)
-      break
-    case constants.MESSAGE_TYPE_MEMBER:
-      this.onAddMember(message)
-      break
-    case constants.MESSAGE_TYPE_SUPER_CHAT:
-      this.onAddSuperChat(message)
-      break
+      case constants.MESSAGE_TYPE_TEXT:
+        this.onAddText(message)
+        break
+      case constants.MESSAGE_TYPE_GIFT:
+        this.onAddGift(message)
+        break
+      case constants.MESSAGE_TYPE_MEMBER:
+        this.onAddMember(message)
+        break
+      case constants.MESSAGE_TYPE_SUPER_CHAT:
+        this.onAddSuperChat(message)
+        break
     }
   }
 }

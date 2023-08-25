@@ -51,7 +51,7 @@ export default {
     exportConfig: 'コンフィグの導出',
     importConfig: 'コンフィグの導入',
 
-    failedToParseConfig: 'コンフィグ解析に失敗しました'
+    failedToParseConfig: 'コンフィグ解析に失敗しました',
   },
   stylegen: {
     legacy: '古典',
@@ -126,7 +126,7 @@ export default {
 
     result: '結果',
     copy: 'コピー',
-    resetConfig: 'デフォルトに戻す'
+    resetConfig: 'デフォルトに戻す',
   },
   help: {
     help: 'ヘルプ',
@@ -134,7 +134,7 @@ export default {
     p2: '2. ホームページでコピーしたIDを入力し、ルームのURLをこぴーする',
     p3: '3. スタイルジェネレータでお好みのコメント様子を選び、出力したCSSをコピーする',
     p4: '4. OBSでブラウザを新規作成する',
-    p5: '5. プロパティでこぴーしたURLを入力し、カスタムCSSでスタイルジェネレータのCSSを入力する'
+    p5: '5. プロパティでこぴーしたURLを入力し、カスタムCSSでスタイルジェネレータのCSSを入力する',
   },
   chat: {
     moderator: 'モデレーター',
@@ -143,6 +143,6 @@ export default {
     guardLevel3: '艦長',
     sendGift: '{giftName}x{num} を贈りました',
     membershipTitle: '新規メンバー',
-    tickerMembership: 'メンバー'
-  }
+    tickerMembership: 'メンバー',
+  },
 }

@@ -7,7 +7,7 @@ export default {
     giftRecordOfficial: 'Official Super Chat Record',
   },
   home: {
-    roomIdEmpty: "Room ID can't be empty",
+    roomIdEmpty: 'Room ID can\'t be empty',
     roomIdInteger: 'Room ID must be positive integer',
 
     general: 'General',
@@ -51,7 +51,7 @@ export default {
     exportConfig: 'Export config',
     importConfig: 'Import config',
 
-    failedToParseConfig: 'Failed to parse config: '
+    failedToParseConfig: 'Failed to parse config: ',
   },
   stylegen: {
     legacy: 'Classic',
@@ -126,7 +126,7 @@ export default {
 
     result: 'Result',
     copy: 'Copy',
-    resetConfig: 'Reset config'
+    resetConfig: 'Reset config',
   },
   help: {
     help: 'Help',
@@ -134,7 +134,7 @@ export default {
     p2: '2. Enter the room ID into the room ID on the home page. Copy the room URL',
     p3: '3. Generate styles with the style generator. Copy the CSS',
     p4: '4. Add browser source in OBS',
-    p5: '5. Enter the previously copied room URL at URL, and enter the previously copied CSS at custom CSS'
+    p5: '5. Enter the previously copied room URL at URL, and enter the previously copied CSS at custom CSS',
   },
   chat: {
     moderator: 'moderator',
@@ -143,6 +143,6 @@ export default {
     guardLevel3: 'captain',
     sendGift: 'Sent {giftName}x{num}',
     membershipTitle: 'New member',
-    tickerMembership: 'Member'
-  }
+    tickerMembership: 'Member',
+  },
 }

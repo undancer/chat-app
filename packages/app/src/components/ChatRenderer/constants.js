@@ -9,18 +9,18 @@ export const AUTHOR_TYPE_TO_TEXT = [
   '',
   'member', // 舰队
   'moderator', // 房管
-  'owner' // 主播
+  'owner', // 主播
 ]
 
 const GUARD_LEVEL_TO_TEXT_KEY = [
   '',
   'chat.guardLevel1',
   'chat.guardLevel2',
-  'chat.guardLevel3'
+  'chat.guardLevel3',
 ]
 
 export function getShowGuardLevelText(guardLevel) {
-  let key = GUARD_LEVEL_TO_TEXT_KEY[guardLevel] || ''
+  const key = GUARD_LEVEL_TO_TEXT_KEY[guardLevel] || ''
   if (key === '') {
     return ''
   }
@@ -48,9 +48,9 @@ export const PRICE_CONFIGS = [
       header: 'rgba(255,255,255,1)',
       authorName: 'rgba(255,255,255,0.701961)',
       time: 'rgba(255,255,255,0.501961)',
-      content: 'rgba(255,255,255,1)'
+      content: 'rgba(255,255,255,1)',
     },
-    pinTime: 60
+    pinTime: 60,
   },
   { // $50品红
     price: 50 * EXCHANGE_RATE,
@@ -60,9 +60,9 @@ export const PRICE_CONFIGS = [
       header: 'rgba(255,255,255,1)',
       authorName: 'rgba(255,255,255,0.701961)',
       time: 'rgba(255,255,255,0.501961)',
-      content: 'rgba(255,255,255,1)'
+      content: 'rgba(255,255,255,1)',
     },
-    pinTime: 30
+    pinTime: 30,
   },
   { // $20橙
     price: 20 * EXCHANGE_RATE,
@@ -72,9 +72,9 @@ export const PRICE_CONFIGS = [
       header: 'rgba(255,255,255,0.87451)',
       authorName: 'rgba(255,255,255,0.701961)',
       time: 'rgba(255,255,255,0.501961)',
-      content: 'rgba(255,255,255,0.87451)'
+      content: 'rgba(255,255,255,0.87451)',
     },
-    pinTime: 10
+    pinTime: 10,
   },
   { // $10黄
     price: 10 * EXCHANGE_RATE,
@@ -84,9 +84,9 @@ export const PRICE_CONFIGS = [
       header: 'rgba(0,0,0,0.87451)',
       authorName: 'rgba(0,0,0,0.541176)',
       time: 'rgba(0,0,0,0.501961)',
-      content: 'rgba(0,0,0,0.87451)'
+      content: 'rgba(0,0,0,0.87451)',
     },
-    pinTime: 5
+    pinTime: 5,
   },
   { // $5绿
     price: 5 * EXCHANGE_RATE,
@@ -96,9 +96,9 @@ export const PRICE_CONFIGS = [
       header: 'rgba(0,0,0,1)',
       authorName: 'rgba(0,0,0,0.541176)',
       time: 'rgba(0,0,0,0.501961)',
-      content: 'rgba(0,0,0,1)'
+      content: 'rgba(0,0,0,1)',
     },
-    pinTime: 2
+    pinTime: 2,
   },
   { // $2浅蓝
     price: 2 * EXCHANGE_RATE,
@@ -108,9 +108,9 @@ export const PRICE_CONFIGS = [
       header: 'rgba(0,0,0,1)',
       authorName: 'rgba(0,0,0,0.701961)',
       time: 'rgba(0,0,0,0.501961)',
-      content: 'rgba(0,0,0,1)'
+      content: 'rgba(0,0,0,1)',
     },
-    pinTime: 0
+    pinTime: 0,
   },
   { // $1蓝
     price: EXCHANGE_RATE,
@@ -120,10 +120,10 @@ export const PRICE_CONFIGS = [
       header: 'rgba(255,255,255,1)',
       authorName: 'rgba(255,255,255,0.701961)',
       time: 'rgba(255,255,255,0.501961)',
-      content: 'rgba(255,255,255,1)'
+      content: 'rgba(255,255,255,1)',
     },
-    pinTime: 0
-  }
+    pinTime: 0,
+  },
 ]
 
 export function getPriceConfig(price) {
@@ -143,11 +143,11 @@ export function getShowContent(message) {
 }
 
 export function getShowRichContent(message) {
-  let richContent = [...message.richContent]
+  const richContent = [...message.richContent]
   if (message.translation) {
     richContent.push({
       type: CONTENT_TYPE_TEXT,
-      text: `（${message.translation}）`
+      text: `（${message.translation}）`,
     })
   }
   return richContent

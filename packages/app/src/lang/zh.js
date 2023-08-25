@@ -51,7 +51,7 @@ export default {
     exportConfig: '导出配置',
     importConfig: '导入配置',
 
-    failedToParseConfig: '配置解析失败：'
+    failedToParseConfig: '配置解析失败：',
   },
   stylegen: {
     legacy: '经典',
@@ -126,7 +126,7 @@ export default {
 
     result: '结果',
     copy: '复制',
-    resetConfig: '恢复默认设置'
+    resetConfig: '恢复默认设置',
   },
   help: {
     help: '帮助',
@@ -134,7 +134,7 @@ export default {
     p2: '2. 把房间ID输入到首页的房间ID，复制房间URL',
     p3: '3. 使用样式生成器生成样式，复制CSS',
     p4: '4. 在OBS中添加浏览器源',
-    p5: '5. URL处输入之前复制的房间URL，自定义CSS处输入之前复制的CSS'
+    p5: '5. URL处输入之前复制的房间URL，自定义CSS处输入之前复制的CSS',
   },
   chat: {
     moderator: '管理员',
@@ -143,6 +143,6 @@ export default {
     guardLevel3: '舰长',
     sendGift: '赠送 {giftName}x{num}',
     membershipTitle: '新会员',
-    tickerMembership: '会员'
-  }
+    tickerMembership: '会员',
+  },
 }

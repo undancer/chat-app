@@ -54,14 +54,14 @@ yt-live-chat-membership-item-renderer a {
 }`
 
 export function getImportStyle(allFonts) {
-  let fontsNeedToImport = new Set()
-  for (let font of allFonts) {
-    if (fonts.NETWORK_FONTS.indexOf(font) !== -1) {
+  const fontsNeedToImport = new Set()
+  for (const font of allFonts) {
+    if (fonts.NETWORK_FONTS.includes(font)) {
       fontsNeedToImport.add(font)
     }
   }
-  let res = []
-  for (let font of fontsNeedToImport) {
+  const res = []
+  for (const font of fontsNeedToImport) {
     res.push(`@import url("https://fonts.googleapis.com/css?family=${encodeURIComponent(font)}");`)
   }
   return res.join('\n')
@@ -106,10 +106,11 @@ export function getAnimationStyle(config) {
     totalTime += config.animateOutWaitTime * 1000
     totalTime += config.fadeOutTime
   }
-  let keyframes = []
+  const keyframes = []
   let curTime = 0
   if (config.animateIn) {
-    keyframes.push(`  0% { opacity: 0;${!config.slide ? ''
+    keyframes.push(`  0% { opacity: 0;${!config.slide
+? ''
       : ` transform: translateX(${config.reverseSlide ? 16 : -16}px);`
     } }`)
     curTime += config.fadeInTime
@@ -119,7 +120,8 @@ export function getAnimationStyle(config) {
     curTime += config.animateOutWaitTime * 1000
     keyframes.push(`  ${curTime / totalTime * 100}% { opacity: 1; transform: none; }`)
     curTime += config.fadeOutTime
-    keyframes.push(`  ${curTime / totalTime * 100}% { opacity: 0;${!config.slide ? ''
+    keyframes.push(`  ${curTime / totalTime * 100}% { opacity: 0;${!config.slide
+? ''
       : ` transform: translateX(${config.reverseSlide ? -16 : 16}px);`
     } }`)
   }
@@ -137,8 +139,8 @@ yt-live-chat-paid-message-renderer {
 }
 
 export function cssEscapeStr(str) {
-  let res = []
-  for (let char of str) {
+  const res = []
+  for (const char of str) {
     res.push(cssEscapeChar(char))
   }
   return res.join('')
@@ -148,14 +150,14 @@ function cssEscapeChar(char) {
   if (!needEscapeChar(char)) {
     return char
   }
-  let hexCode = char.codePointAt(0).toString(16)
+  const hexCode = char.codePointAt(0).toString(16)
   // https://drafts.csswg.org/cssom/#escape-a-character-as-code-point
   return `\\${hexCode} `
 }
 
 function needEscapeChar(char) {
-  let code = char.codePointAt(0)
-  if (0x20 <= code && code <= 0x7E) {
+  const code = char.codePointAt(0)
+  if (code >= 0x20 && code <= 0x7E) {
     return char === '"' || char === '\\'
   }
   return true

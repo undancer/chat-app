@@ -60,9 +60,9 @@ export default class ChatClientRelay {
       data: {
         roomId: this.roomId,
         config: {
-          autoTranslate: this.autoTranslate
-        }
-      }
+          autoTranslate: this.autoTranslate,
+        },
+      },
     }))
     this.refreshReceiveTimeoutTimer()
   }
@@ -103,79 +103,79 @@ export default class ChatClientRelay {
 
     let { cmd, data } = JSON.parse(event.data)
     switch (cmd) {
-    case COMMAND_HEARTBEAT: {
+      case COMMAND_HEARTBEAT: {
       // 不能由定时器触发发心跳包，因为浏览器会把不活动页面的定时器调到1分钟以上
-      this.websocket.send(JSON.stringify({
-        cmd: COMMAND_HEARTBEAT
-      }))
-      break
-    }
-    case COMMAND_ADD_TEXT: {
-      if (!this.onAddText) {
+        this.websocket.send(JSON.stringify({
+          cmd: COMMAND_HEARTBEAT,
+        }))
         break
       }
+      case COMMAND_ADD_TEXT: {
+        if (!this.onAddText) {
+          break
+        }
 
-      let emoticon = null
-      let contentType = data[13]
-      let contentTypeParams = data[14]
-      if (contentType === CONTENT_TYPE_EMOTICON) {
-        emoticon = contentTypeParams[0]
-      }
+        let emoticon = null
+        const contentType = data[13]
+        const contentTypeParams = data[14]
+        if (contentType === CONTENT_TYPE_EMOTICON) {
+          emoticon = contentTypeParams[0]
+        }
 
-      data = {
-        avatarUrl: data[0],
-        timestamp: data[1],
-        authorName: data[2],
-        authorType: data[3],
-        content: data[4],
-        privilegeType: data[5],
-        isGiftDanmaku: Boolean(data[6]),
-        authorLevel: data[7],
-        isNewbie: Boolean(data[8]),
-        isMobileVerified: Boolean(data[9]),
-        medalLevel: data[10],
-        id: data[11],
-        translation: data[12],
-        emoticon: emoticon
-      }
-      this.onAddText(data)
-      break
-    }
-    case COMMAND_ADD_GIFT: {
-      if (this.onAddGift) {
-        this.onAddGift(data)
-      }
-      break
-    }
-    case COMMAND_ADD_MEMBER: {
-      if (this.onAddMember) {
-        this.onAddMember(data)
-      }
-      break
-    }
-    case COMMAND_ADD_SUPER_CHAT: {
-      if (this.onAddSuperChat) {
-        this.onAddSuperChat(data)
-      }
-      break
-    }
-    case COMMAND_DEL_SUPER_CHAT: {
-      if (this.onDelSuperChat) {
-        this.onDelSuperChat(data)
-      }
-      break
-    }
-    case COMMAND_UPDATE_TRANSLATION: {
-      if (!this.onUpdateTranslation) {
+        data = {
+          avatarUrl: data[0],
+          timestamp: data[1],
+          authorName: data[2],
+          authorType: data[3],
+          content: data[4],
+          privilegeType: data[5],
+          isGiftDanmaku: Boolean(data[6]),
+          authorLevel: data[7],
+          isNewbie: Boolean(data[8]),
+          isMobileVerified: Boolean(data[9]),
+          medalLevel: data[10],
+          id: data[11],
+          translation: data[12],
+          emoticon,
+        }
+        this.onAddText(data)
         break
       }
-      data = {
-        id: data[0],
-        translation: data[1]
+      case COMMAND_ADD_GIFT: {
+        if (this.onAddGift) {
+          this.onAddGift(data)
+        }
+        break
       }
-      this.onUpdateTranslation(data)
-      break
-    }
+      case COMMAND_ADD_MEMBER: {
+        if (this.onAddMember) {
+          this.onAddMember(data)
+        }
+        break
+      }
+      case COMMAND_ADD_SUPER_CHAT: {
+        if (this.onAddSuperChat) {
+          this.onAddSuperChat(data)
+        }
+        break
+      }
+      case COMMAND_DEL_SUPER_CHAT: {
+        if (this.onDelSuperChat) {
+          this.onDelSuperChat(data)
+        }
+        break
+      }
+      case COMMAND_UPDATE_TRANSLATION: {
+        if (!this.onUpdateTranslation) {
+          break
+        }
+        data = {
+          id: data[0],
+          translation: data[1],
+        }
+        this.onUpdateTranslation(data)
+        break
+      }
     }
   }
 }

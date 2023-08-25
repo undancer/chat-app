@@ -1,55 +1,59 @@
-<template>
-  <el-container class="app-wrapper" :class="{ mobile: isMobile }">
-    <div v-show="isMobile && !hideSidebar" class="drawer-bg" @click="hideSidebar = true"></div>
-    <el-aside width="230px" class="sidebar-container" :class="{ 'hide-sidebar': hideSidebar }">
-      <div class="logo-container">
-        <router-link to="/">
-          <img src="@/assets/img/logo.png" class="sidebar-logo">
-          <h1 class="sidebar-title">blivechat</h1>
-        </router-link>
-      </div>
-      <div class="version">{{ APP_VERSION }}</div>
-      <sidebar></sidebar>
-    </el-aside>
-    <el-main>
-      <el-button v-show="isMobile" class="menu-button" icon="el-icon-s-unfold" @click="hideSidebar = false"></el-button>
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
-    </el-main>
-  </el-container>
-</template>
-
 <script>
 import Sidebar from './Sidebar'
 
 export default {
   name: 'Layout',
   components: {
-    Sidebar
+    Sidebar,
   },
   data() {
     return {
       APP_VERSION: process.env.APP_VERSION,
 
       isMobile: false,
-      hideSidebar: true
+      hideSidebar: true,
     }
   },
   mounted() {
     window.addEventListener('resize', this.onResize)
     this.onResize()
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('resize', this.onResize)
   },
   methods: {
     onResize() {
       this.isMobile = document.body.clientWidth <= 992
-    }
-  }
+    },
+  },
 }
 </script>
+
+<template>
+  <el-container class="app-wrapper" :class="{ mobile: isMobile }">
+    <div v-show="isMobile && !hideSidebar" class="drawer-bg" @click="hideSidebar = true" />
+    <el-aside width="230px" class="sidebar-container" :class="{ 'hide-sidebar': hideSidebar }">
+      <div class="logo-container">
+        <router-link to="/">
+          <img src="@/assets/img/logo.png" class="sidebar-logo">
+          <h1 class="sidebar-title">
+            blivechat
+          </h1>
+        </router-link>
+      </div>
+      <div class="version">
+        {{ APP_VERSION }}
+      </div>
+      <Sidebar />
+    </el-aside>
+    <el-main>
+      <el-button v-show="isMobile" class="menu-button" icon="el-icon-s-unfold" @click="hideSidebar = false" />
+      <keep-alive>
+        <router-view />
+      </keep-alive>
+    </el-main>
+  </el-container>
+</template>
 
 <style>
 html {

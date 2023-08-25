@@ -5,7 +5,7 @@ export async function getServerInfo() {
 }
 
 export async function uploadEmoticon(file) {
-  let body = new FormData()
+  const body = new FormData()
   body.set('file', file)
   return (await axios.post('/api/emoticon', body)).data
 }

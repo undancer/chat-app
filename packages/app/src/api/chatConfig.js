@@ -23,7 +23,7 @@ export const DEFAULT_CONFIG = {
   autoTranslate: false,
   giftUsernamePronunciation: '',
 
-  emoticons: [] // [{ keyword: '', url: '' }, ...]
+  emoticons: [], // [{ keyword: '', url: '' }, ...]
 }
 
 export function deepCloneDefaultConfig() {
@@ -47,13 +47,13 @@ export function getLocalConfig() {
 }
 
 export function sanitizeConfig(config) {
-  let newEmoticons = []
-  if (config.emoticons instanceof Array) {
-    for (let emoticon of config.emoticons) {
+  const newEmoticons = []
+  if (Array.isArray(config.emoticons)) {
+    for (const emoticon of config.emoticons) {
       try {
-        let newEmoticon = {
+        const newEmoticon = {
           keyword: emoticon.keyword,
-          url: emoticon.url
+          url: emoticon.url,
         }
         if ((typeof newEmoticon.keyword !== 'string') || (typeof newEmoticon.url !== 'string')) {
           continue
