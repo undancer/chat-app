@@ -1,4 +1,4 @@
-import { getUuid4Hex } from '../../utils'
+import { getUuid4Hex } from '../../../utils'
 import * as avatar from './avatar'
 import * as constants from './../../components/ChatRenderer/constants'
 

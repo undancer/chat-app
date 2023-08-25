@@ -1,5 +1,5 @@
 <script lang="ts">
-import i18n from '../plugins/i18n'
+import i18n from '../lang'
 
 export default {
   name: 'Sidebar',

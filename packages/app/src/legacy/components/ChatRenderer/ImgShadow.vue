@@ -34,4 +34,4 @@ export default {
   </yt-img-shadow>
 </template>
 
-<style src="../../assets/css/youtube/yt-img-shadow.css"></style>
+<style src="../../../assets/css/youtube/yt-img-shadow.css"></style>

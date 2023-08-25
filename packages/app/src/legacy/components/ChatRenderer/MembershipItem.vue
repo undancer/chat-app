@@ -1,5 +1,5 @@
 <script lang="ts">
-import * as utils from '../../../legacy/utils'
+import * as utils from '../../../utils'
 import ImgShadow from './ImgShadow.vue'
 import AuthorChip from './AuthorChip.vue'
 
@@ -53,4 +53,4 @@ export default {
   </yt-live-chat-membership-item-renderer>
 </template>
 
-<style src="../../assets/css/youtube/yt-live-chat-membership-item-renderer.css"></style>
+<style src="../../../assets/css/youtube/yt-live-chat-membership-item-renderer.css"></style>

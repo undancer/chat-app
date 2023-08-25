@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import * as avatar from '../avatar'
 
-import { getUuid4Hex } from '../../../utils'
+import { getUuid4Hex } from '../../../../utils'
 import { BrotliDecode } from './brotli_decode'
 
 const HEADER_SIZE = 16

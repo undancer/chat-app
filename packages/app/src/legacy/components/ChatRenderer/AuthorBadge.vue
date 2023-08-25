@@ -50,6 +50,6 @@ export default {
   </yt-live-chat-author-badge-renderer>
 </template>
 
-<style src="../../assets/css/youtube/yt-live-chat-author-badge-renderer.css"></style>
+<style src="../../../assets/css/youtube/yt-live-chat-author-badge-renderer.css"></style>
 
-<style src="../../assets/css/youtube/yt-icon.css"></style>
+<style src="../../../assets/css/youtube/yt-icon.css"></style>

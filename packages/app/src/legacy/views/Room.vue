@@ -1,8 +1,8 @@
 <script lang="ts">
-import i18n from '../plugins/i18n'
-import { mergeConfig, toBool, toInt } from '../utils'
-import * as trie from '../../legacy/utils/trie'
-import * as pronunciation from '../../legacy/utils/pronunciation'
+import i18n from '../lang'
+import { mergeConfig, toBool, toInt } from '../../utils'
+import * as trie from '../../utils/trie.ts'
+import * as pronunciation from '../../utils/pronunciation'
 import * as chatConfig from '../../legacy/api/chatConfig'
 import ChatClientTest from '../../legacy/api/chat/ChatClientTest'
 import ChatClientDirect from '../../legacy/api/chat/ChatClientDirect'

@@ -1,5 +1,5 @@
 <script lang="ts">
-import { formatCurrency } from '../../utils'
+import { formatCurrency } from '../../../utils'
 import * as chatConfig from '../../api/chatConfig'
 import ImgShadow from './ImgShadow.vue'
 import MembershipItem from './MembershipItem.vue'
@@ -210,6 +210,6 @@ export default {
   </yt-live-chat-ticker-renderer>
 </template>
 
-<style src="../../assets/css/youtube/yt-live-chat-ticker-renderer.css"></style>
+<style src="../../../assets/css/youtube/yt-live-chat-ticker-renderer.css"></style>
 
-<style src="../../assets/css/youtube/yt-live-chat-ticker-paid-message-item-renderer.css"></style>
+<style src="../../../assets/css/youtube/yt-live-chat-ticker-paid-message-item-renderer.css"></style>
