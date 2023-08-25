@@ -1,32 +1,24 @@
-<script lang="ts">
+<script lang="ts" setup>
+import { onBeforeMount, onMounted, ref } from 'vue'
+import { useEventListener, useWindowSize } from '@vueuse/core'
 import Sidebar from './Sidebar.vue'
 
-export default {
-  name: 'Layout',
-  components: {
-    Sidebar,
-  },
-  data() {
-    return {
-      // APP_VERSION: process.env.APP_VERSION,
-      APP_VERSION: 'dev?',
-      isMobile: false,
-      hideSidebar: true,
-    }
-  },
-  mounted() {
-    window.addEventListener('resize', this.onResize)
-    this.onResize()
-  },
-  beforeUnmount() {
-    window.removeEventListener('resize', this.onResize)
-  },
-  methods: {
-    onResize() {
-      this.isMobile = document.body.clientWidth <= 992
-    },
-  },
-}
+// APP_VERSION: process.env.APP_VERSION,
+const APP_VERSION = 'dev?'
+const isMobile = ref(false)
+const hideSidebar = ref(true)
+
+onMounted(() => {
+  const cleanup = useEventListener(window, ['resize'], () => {
+    const { width } = useWindowSize()
+    // isMobile.value = document.body.clientWidth <= 992
+    isMobile.value = width.value <= 992
+  })
+
+  onBeforeMount(() => {
+    cleanup()
+  })
+})
 </script>
 
 <template>
