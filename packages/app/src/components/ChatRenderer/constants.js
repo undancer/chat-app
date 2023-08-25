@@ -1,4 +1,4 @@
-import * as i18n from '../../plugins/i18n/legacy.ts'
+import i18n from '../../plugins/i18n'
 
 export const AUTHRO_TYPE_NORMAL = 0
 export const AUTHRO_TYPE_MEMBER = 1
@@ -24,7 +24,7 @@ export function getShowGuardLevelText(guardLevel) {
   if (key === '') {
     return ''
   }
-  return i18n.i18n.t(key)
+  return i18n.global.t(key)
 }
 
 export const MESSAGE_TYPE_TEXT = 0
@@ -157,7 +157,7 @@ export function getGiftShowContent(message, showGiftName) {
   if (!showGiftName) {
     return ''
   }
-  return i18n.i18n.t('chat.sendGift', { giftName: message.giftName, num: message.num })
+  return i18n.global.t('chat.sendGift', { giftName: message.giftName, num: message.num })
 }
 
 export function getShowAuthorName(message) {

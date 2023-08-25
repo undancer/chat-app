@@ -1,5 +1,5 @@
 <script lang="ts">
-import * as i18n from '../plugins/i18n/legacy.ts'
+import i18n from '../plugins/i18n'
 
 export default {
   name: 'Sidebar',
@@ -13,8 +13,9 @@ export default {
     }
   },
   methods: {
-    onSelectLanguage(locale) {
-      i18n.setLocale(locale)
+    onSelectLanguage(locale: string) {
+      // i18n..setLocale(locale)
+      i18n.global.locale = locale
     },
   },
 }

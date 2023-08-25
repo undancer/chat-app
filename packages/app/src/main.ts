@@ -1,32 +1,26 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import {
-  Message,
-} from 'element-ui'
-import axios from 'axios'
-
-import * as i18n from './plugins/i18n/legacy.ts'
+import { createApp } from 'vue'
+import ElementPlus from 'element-plus'
 import App from './App.vue'
-import router from './routes/legacy'
+import router from '@/routes'
+import i18n from '@/plugins/i18n'
+import 'element-plus/dist/index.css'
+import stores from '@/stores'
+import axios from 'axios'
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
-import './plugins/utils'
+axios.defaults.timeout = 60 * 1000
 
-axios.defaults.timeout = 60 * 1000;
+const app = createApp(App)
+for (const [name, comp] of Object.entries(ElementPlusIconsVue)) {
+  app.component(name, comp)
+  app.component(`ElIcon${name}`, comp)
+}
 
-((app: { use(a: any): void }) => {
-  app.use(VueRouter)
-})(Vue)
-
-Vue.prototype.$message = Message
-
-Vue.config.ignoredElements = [
+app.use(ElementPlus)
+app.use(i18n)
+app.use(router)
+app.use(stores)
+app.config.ignoredElements = [
   /^yt-/,
 ]
-
-// createApp(App).config.isCustomElement
-
-new Vue({
-  render: h => h(App),
-  router,
-  i18n: i18n.i18n,
-}).$mount('#app')
+app.mount('#app')

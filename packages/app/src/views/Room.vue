@@ -1,5 +1,5 @@
-<script>
-import * as i18n from '../plugins/i18n/legacy.ts'
+<script lang="ts">
+import i18n from '../plugins/i18n'
 import { mergeConfig, toBool, toInt } from '@/utils'
 import * as trie from '@/utils/trie'
 import * as pronunciation from '@/utils/pronunciation'
@@ -86,7 +86,8 @@ export default {
     initConfig() {
       const locale = this.strConfig.lang
       if (locale) {
-        i18n.setLocale(locale)
+        i18n.global.locale = locale
+        // i18n.setLocale(locale)
       }
 
       let cfg = {}

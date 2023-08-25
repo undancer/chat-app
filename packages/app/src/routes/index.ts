@@ -1,10 +1,12 @@
-import type { RouteRecordRaw, RouterHistory } from 'vue-router4'
-import { createRouter, createWebHistory } from 'vue-router4'
+import type { RouteRecordRaw, RouterHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+
 import Layout from '@/layout/index.vue'
 import Home from '@/views/Home.vue'
 import StyleGenerator from '@/views/StyleGenerator/index.vue'
 import Help from '@/views/Help.vue'
 import Room from '@/views/Room.vue'
+
 import NotFound from '@/views/NotFound.vue'
 
 const history: RouterHistory = createWebHistory()
@@ -37,7 +39,8 @@ const routes: RouteRecordRaw[] = [
       return { roomId, strConfig: route.query }
     },
   },
-  { path: '*', component: NotFound },
+  // { path: '*', component: NotFound },
+  { path: '/:pathMatch(.*)*', name: 'not-found', component: NotFound },
 ]
 
 const router = createRouter({ history, routes })

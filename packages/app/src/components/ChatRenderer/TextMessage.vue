@@ -69,10 +69,10 @@ export default {
       />
       <span id="message" class="style-scope yt-live-chat-text-message-renderer">
         <template v-for="(content, index) in richContent">
-          <span v-if="content.type === CONTENT_TYPE_TEXT" :key="index">{{ content.text }}</span>
+          <span v-if="content.type === CONTENT_TYPE_TEXT" :key="`s-${index}`">{{ content.text }}</span>
           <img
             v-else-if="content.type === CONTENT_TYPE_IMAGE" :id="`emoji-${content.text}`"
-            :key="index"
+            :key="`i-${index}`"
             class="emoji yt-formatted-string style-scope yt-live-chat-text-message-renderer" :src="content.url" :alt="content.text" :shared-tooltip-text="content.text"
           >
         </template>

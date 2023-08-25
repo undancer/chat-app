@@ -1,13 +1,14 @@
 import path from 'node:path'
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue2'
 
-// import vue from '@vitejs/plugin-vue'
+// import vue2 from '@vitejs/plugin-vue2'
+import vue3 from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    // vue2(),
+    vue3(),
   ],
   resolve: {
     alias: {
