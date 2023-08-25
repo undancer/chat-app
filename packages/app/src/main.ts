@@ -7,7 +7,7 @@ import App from './App.vue'
 import routes from './routes'
 import stores from './stores'
 
-import i18n from './legacy/lang'
+import i18n from './languages'
 
 import 'element-plus/dist/index.css'
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-import * as avatar from '../../api/chat/avatar'
+import * as avatar from '../../api/chat/avatar.ts'
 
 export default {
   name: 'ImgShadow',
@@ -34,4 +34,4 @@ export default {
   </yt-img-shadow>
 </template>
 
-<style src="../../../assets/css/youtube/yt-img-shadow.css"></style>
+<style src="../../assets/css/youtube/yt-img-shadow.css"></style>

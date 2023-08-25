@@ -1,10 +1,10 @@
 <script lang="ts">
-import { formatCurrency } from '../../../utils'
-import * as chatConfig from '../../api/chatConfig'
+import { formatCurrency } from '../../utils'
+import * as chatConfig from '../../api/chatConfig.ts'
 import ImgShadow from './ImgShadow.vue'
 import MembershipItem from './MembershipItem.vue'
 import PaidMessage from './PaidMessage.vue'
-import * as constants from './constants'
+import * as constants from './constants.ts'
 
 export default {
   name: 'Ticker',
@@ -210,6 +210,6 @@ export default {
   </yt-live-chat-ticker-renderer>
 </template>
 
-<style src="../../../assets/css/youtube/yt-live-chat-ticker-renderer.css"></style>
+<style src="../../assets/css/youtube/yt-live-chat-ticker-renderer.css"></style>
 
-<style src="../../../assets/css/youtube/yt-live-chat-ticker-paid-message-item-renderer.css"></style>
+<style src="../../assets/css/youtube/yt-live-chat-ticker-paid-message-item-renderer.css"></style>

@@ -22,4 +22,7 @@ module.exports = {
       },
     },
   ],
+  ignorePatterns: [
+    'brotli_decode.ts',
+  ],
 }

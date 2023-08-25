@@ -1,5 +1,5 @@
 <script lang="ts">
-import * as constants from './constants'
+import * as constants from './constants.ts'
 
 export default {
   name: 'AuthorBadge',
@@ -50,6 +50,6 @@ export default {
   </yt-live-chat-author-badge-renderer>
 </template>
 
-<style src="../../../assets/css/youtube/yt-live-chat-author-badge-renderer.css"></style>
+<style src="../../assets/css/youtube/yt-live-chat-author-badge-renderer.css"></style>
 
-<style src="../../../assets/css/youtube/yt-icon.css"></style>
+<style src="../../assets/css/youtube/yt-icon.css"></style>

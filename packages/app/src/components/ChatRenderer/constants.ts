@@ -1,4 +1,4 @@
-import i18n from '../../lang'
+import i18n from '../../languages'
 
 export const AUTHRO_TYPE_NORMAL = 0
 export const AUTHRO_TYPE_MEMBER = 1

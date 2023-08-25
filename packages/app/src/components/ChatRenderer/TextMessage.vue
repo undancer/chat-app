@@ -1,8 +1,8 @@
 <script lang="ts">
-import * as utils from '../../../utils'
+import * as utils from '../../utils'
 import ImgShadow from './ImgShadow.vue'
 import AuthorChip from './AuthorChip.vue'
-import * as constants from './constants'
+import * as constants from './constants.ts'
 
 // HSL
 const REPEATED_MARK_COLOR_START = [210, 100.0, 62.5]
@@ -101,4 +101,4 @@ yt-live-chat-text-message-renderer>#content>#message>.el-badge .el-badge__conten
 }
 </style>
 
-<style src="../../../assets/css/youtube/yt-live-chat-text-message-renderer.css"></style>
+<style src="../../assets/css/youtube/yt-live-chat-text-message-renderer.css"></style>

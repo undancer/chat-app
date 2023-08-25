@@ -1,7 +1,7 @@
 <script lang="ts">
-import * as utils from '../../../utils'
+import * as utils from '../../utils'
 import ImgShadow from './ImgShadow.vue'
-import * as constants from './constants'
+import * as constants from './constants.ts'
 
 export default {
   name: 'PaidMessage',
@@ -68,4 +68,4 @@ export default {
   </yt-live-chat-paid-message-renderer>
 </template>
 
-<style src="../../../assets/css/youtube/yt-live-chat-paid-message-renderer.css"></style>
+<style src="../../assets/css/youtube/yt-live-chat-paid-message-renderer.css"></style>

@@ -1,6 +1,6 @@
 <script lang="ts">
 import AuthorBadge from './AuthorBadge.vue'
-import * as constants from './constants'
+import * as constants from './constants.ts'
 
 export default {
   name: 'AuthorChip',
@@ -55,4 +55,4 @@ export default {
   </yt-live-chat-author-chip>
 </template>
 
-<style src="../../../assets/css/youtube/yt-live-chat-author-chip.css"></style>
+<style src="../../assets/css/youtube/yt-live-chat-author-chip.css"></style>

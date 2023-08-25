@@ -1,13 +1,13 @@
 import type { RouteRecordRaw, RouterHistory } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
 
-import Layout from '../legacy/layout/index.vue'
-import Home from '../legacy/views/Home.vue'
-import StyleGenerator from '../legacy/views/StyleGenerator/index.vue'
-import Help from '../legacy/views/Help.vue'
-import Room from '../legacy/views/Room.vue'
+import Layout from '../layouts/index.vue'
+import Home from '../views/Home.vue'
+import StyleGenerator from '../views/StyleGenerator/index.vue'
+import Help from '../views/Help.vue'
+import Room from '../views/Room.vue'
 
-import NotFound from '../legacy/views/NotFound.vue'
+import NotFound from '../views/NotFound.vue'
 
 const history: RouterHistory = createWebHistory()
 

@@ -1,10 +1,10 @@
 <script lang="ts">
+import * as chatConfig from '../../api/chatConfig.ts'
 import Ticker from './Ticker.vue'
 import TextMessage from './TextMessage.vue'
 import MembershipItem from './MembershipItem.vue'
 import PaidMessage from './PaidMessage.vue'
-import * as constants from './constants'
-import * as chatConfig from './../../../legacy/api/chatConfig'
+import * as constants from './constants.ts'
 
 // 只有要添加的消息需要平滑
 const NEED_SMOOTH_MESSAGE_TYPES = [
@@ -584,8 +584,8 @@ export default {
   </yt-live-chat-renderer>
 </template>
 
-<style src="../../../assets/css/youtube/yt-html.css"></style>
+<style src="../../assets/css/youtube/yt-html.css"></style>
 
-<style src="../../../assets/css/youtube/yt-live-chat-renderer.css"></style>
+<style src="../../assets/css/youtube/yt-live-chat-renderer.css"></style>
 
-<style src="../../../assets/css/youtube/yt-live-chat-item-list-renderer.css"></style>
+<style src="../../assets/css/youtube/yt-live-chat-item-list-renderer.css"></style>

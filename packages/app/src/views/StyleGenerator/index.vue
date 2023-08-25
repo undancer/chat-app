@@ -1,7 +1,7 @@
 <script lang="ts">
 import _ from 'lodash'
 
-import Room from '../../views/Room.vue'
+import Room from '../Room.vue'
 import Legacy from './Legacy.vue'
 import LineLike from './LineLike.vue'
 
