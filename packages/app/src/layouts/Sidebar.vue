@@ -31,32 +31,40 @@ export default {
       :default-active="$route.path"
     >
       <el-menu-item index="/">
-        <i class="el-icon-s-home" />{{ $t('sidebar.home') }}
+        <el-icon><House /></el-icon>
+        {{ $t('sidebar.home') }}
       </el-menu-item>
       <el-menu-item :index="$router.resolve({ name: 'stylegen' }).href">
-        <i class="el-icon-brush" />{{ $t('sidebar.stylegen') }}
+        <el-icon><Brush /></el-icon>
+        {{ $t('sidebar.stylegen') }}
       </el-menu-item>
       <el-menu-item :index="$router.resolve({ name: 'help' }).href">
-        <i class="el-icon-question" />{{ $t('sidebar.help') }}
+        <el-icon><Help /></el-icon>
+        {{ $t('sidebar.help') }}
       </el-menu-item>
       <a href="https://github.com/xfgryujk/blivechat" target="_blank">
         <el-menu-item>
-          <i class="el-icon-share" />{{ $t('sidebar.projectAddress') }}
+          <el-icon><Share /></el-icon>
+          {{ $t('sidebar.projectAddress') }}
         </el-menu-item>
       </a>
       <a href="http://link.bilibili.com/ctool/vtuber" target="_blank">
         <el-menu-item>
-          <i class="el-icon-link" />{{ $t('sidebar.giftRecordOfficial') }}
+          <el-icon><Link /></el-icon>
+          {{ $t('sidebar.giftRecordOfficial') }}
         </el-menu-item>
       </a>
-      <el-submenu index="null">
+      <el-sub-menu index="null">
         <template #title>
-          <i class="el-icon-chat-line-square" />Language
+          <el-icon><ChatLineSquare /></el-icon>
+          Language
         </template>
-        <el-menu-item v-for="locale in LOCALES" :key="locale.locale" @click="onSelectLanguage(locale.locale)">
-          <template>{{ locale.name }}</template>
-        </el-menu-item>
-      </el-submenu>
+        <el-menu-item-group>
+          <el-menu-item v-for="locale in LOCALES" :key="locale.locale" @click="onSelectLanguage(locale.locale)">
+            {{ locale.name }}
+          </el-menu-item>
+        </el-menu-item-group>
+      </el-sub-menu>
     </el-menu>
   </el-scrollbar>
 </template>
