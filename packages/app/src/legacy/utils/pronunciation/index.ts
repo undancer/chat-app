@@ -10,10 +10,10 @@ export class PronunciationConverter {
     let promise
     switch (dictName) {
       case DICT_PINYIN:
-        promise = import('./dictPinyin.ts')
+        promise = import('./dictPinyin')
         break
       case DICT_KANA:
-        promise = import('./dictKana.ts')
+        promise = import('./dictKana')
         break
       default:
         return

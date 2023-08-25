@@ -1,6 +1,6 @@
 <script lang="ts">
 import AuthorBadge from './AuthorBadge.vue'
-import * as constants from './constants.ts'
+import * as constants from './constants'
 
 export default {
   name: 'AuthorChip',

@@ -1,9 +1,9 @@
 <script lang="ts">
 import _ from 'lodash'
 
+import { mergeConfig } from '../../utils'
 import FontSelect from './FontSelect.vue'
-import * as common from './common.ts'
-import { mergeConfig } from '@/legacy/utils'
+import * as common from './common'
 
 export const DEFAULT_CONFIG = {
   showOutlines: true,

@@ -1,4 +1,4 @@
-import * as fonts from './fonts.ts'
+import * as fonts from './fonts'
 
 export const FALLBACK_FONTS = ', "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\\5FAE \\8F6F \\96C5 \\9ED1 ", SimHei, Arial, sans-serif'
 

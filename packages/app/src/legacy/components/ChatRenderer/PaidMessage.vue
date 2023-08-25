@@ -1,7 +1,7 @@
 <script lang="ts">
+import * as utils from '../../../legacy/utils'
 import ImgShadow from './ImgShadow.vue'
-import * as constants from './constants.ts'
-import * as utils from '@/legacy/utils'
+import * as constants from './constants'
 
 export default {
   name: 'PaidMessage',

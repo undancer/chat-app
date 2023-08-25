@@ -1,8 +1,8 @@
 <script lang="ts">
+import * as utils from '../../../legacy/utils'
 import ImgShadow from './ImgShadow.vue'
 import AuthorChip from './AuthorChip.vue'
-import * as constants from './constants.ts'
-import * as utils from '@/legacy/utils'
+import * as constants from './constants'
 
 // HSL
 const REPEATED_MARK_COLOR_START = [210, 100.0, 62.5]

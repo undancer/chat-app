@@ -1,7 +1,7 @@
 <script lang="ts">
+import * as utils from '../../../legacy/utils'
 import ImgShadow from './ImgShadow.vue'
 import AuthorChip from './AuthorChip.vue'
-import * as utils from '@/legacy/utils'
 
 export default {
   name: 'MembershipItem',
