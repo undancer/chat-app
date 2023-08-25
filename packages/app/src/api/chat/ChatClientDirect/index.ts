@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-import * as avatar from '../avatar.ts'
+import * as avatar from '../avatar'
 
 import { getUuid4Hex } from '../../../utils'
-import { BrotliDecode } from './brotli_decode.ts'
+import { brotliDecode } from './brotli_decode'
 
 const HEADER_SIZE = 16
 
@@ -249,7 +249,7 @@ export default class ChatClientDirect {
       // 业务消息
         if (ver == WS_BODY_PROTOCOL_VERSION_BROTLI) {
         // 压缩过的先解压
-          body = BrotliDecode(body)
+          body = brotliDecode(body)
           this.parseWsMessage(body)
         } else {
         // 没压缩过的直接反序列化
