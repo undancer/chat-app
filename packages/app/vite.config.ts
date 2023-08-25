@@ -25,6 +25,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api\/server_info/, '/get'),
       },
+      '/api/emoticon': {
+        target: 'https://httpbin.org',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api\/emoticon/, '/get'),
+      },
     },
   },
 })
