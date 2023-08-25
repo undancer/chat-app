@@ -2,7 +2,7 @@
 import _ from 'lodash'
 
 import FontSelect from './FontSelect.vue'
-import * as common from './common.js'
+import * as common from './common.ts'
 import { mergeConfig } from '@/legacy/utils'
 
 export const DEFAULT_CONFIG = {

@@ -4,7 +4,7 @@ import MembershipItem from './MembershipItem.vue'
 import PaidMessage from './PaidMessage.vue'
 import * as constants from './constants.ts'
 import { formatCurrency } from '@/legacy/utils'
-import * as chatConfig from '@/legacy/api/chatConfig.js'
+import * as chatConfig from '@/legacy/api/chatConfig.ts'
 
 export default {
   name: 'Ticker',

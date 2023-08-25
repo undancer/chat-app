@@ -4,7 +4,7 @@ import TextMessage from './TextMessage.vue'
 import MembershipItem from './MembershipItem.vue'
 import PaidMessage from './PaidMessage.vue'
 import * as constants from './constants.ts'
-import * as chatConfig from '@/legacy/api/chatConfig.js'
+import * as chatConfig from '@/legacy/api/chatConfig.ts'
 
 // 只有要添加的消息需要平滑
 const NEED_SMOOTH_MESSAGE_TYPES = [

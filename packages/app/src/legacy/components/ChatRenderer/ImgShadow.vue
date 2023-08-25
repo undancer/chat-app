@@ -1,5 +1,5 @@
 <script lang="ts">
-import * as avatar from '@/legacy/api/chat/avatar.js'
+import * as avatar from '@/legacy/api/chat/avatar.ts'
 
 export default {
   name: 'ImgShadow',

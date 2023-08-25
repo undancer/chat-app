@@ -1,8 +1,10 @@
 import axios from 'axios'
 
-import * as avatar from '../avatar.js'
-import { BrotliDecode } from './brotli_decode.js'
-import { getUuid4Hex } from '@/legacy/utils/index.js'
+import * as avatar from '../avatar.ts'
+
+import { BrotliDecode } from './brotli_decode.ts'
+
+import { getUuid4Hex } from '@/legacy/utils/index.ts'
 
 const HEADER_SIZE = 16
 

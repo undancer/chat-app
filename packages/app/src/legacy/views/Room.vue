@@ -1,12 +1,12 @@
 <script lang="ts">
 import i18n from '../plugins/i18n'
 import { mergeConfig, toBool, toInt } from '@/legacy/utils'
-import * as trie from '@/legacy/utils/trie.js'
+import * as trie from '@/legacy/utils/trie.ts'
 import * as pronunciation from '@/legacy/utils/pronunciation'
-import * as chatConfig from '@/legacy/api/chatConfig.js'
-import ChatClientTest from '@/legacy/api/chat/ChatClientTest.js'
+import * as chatConfig from '@/legacy/api/chatConfig.ts'
+import ChatClientTest from '@/legacy/api/chat/ChatClientTest.ts'
 import ChatClientDirect from '@/legacy/api/chat/ChatClientDirect'
-import ChatClientRelay from '@/legacy/api/chat/ChatClientRelay.js'
+import ChatClientRelay from '@/legacy/api/chat/ChatClientRelay.ts'
 import ChatRenderer from '@/legacy/components/ChatRenderer/index.vue'
 import * as constants from '@/legacy/components/ChatRenderer/constants.ts'
 

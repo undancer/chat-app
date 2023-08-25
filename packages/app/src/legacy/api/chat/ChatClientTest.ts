@@ -1,5 +1,5 @@
-import * as avatar from './avatar.js'
-import { getUuid4Hex } from '@/legacy/utils/index.js'
+import * as avatar from './avatar.ts'
+import { getUuid4Hex } from '@/legacy/utils/index.ts'
 import * as constants from '@/legacy/components/ChatRenderer/constants.ts'
 
 const NAMES = [

@@ -1,5 +1,5 @@
 <script lang="ts">
-import * as fonts from './fonts.js'
+import * as fonts from './fonts.ts'
 
 export default {
   name: 'FontSelect',
