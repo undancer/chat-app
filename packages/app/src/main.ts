@@ -1,12 +1,13 @@
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
-import App from './App.vue'
-import router from '@/routes'
-import i18n from '@/plugins/i18n'
-import 'element-plus/dist/index.css'
-import stores from '@/stores'
 import axios from 'axios'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import App from './App.vue'
+import router from './legacy/routes'
+import stores from './legacy/stores'
+import i18n from '@/legacy/plugins/i18n'
+
+import 'element-plus/dist/index.css'
 
 axios.defaults.timeout = 60 * 1000
 
