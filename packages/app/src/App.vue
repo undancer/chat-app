@@ -33,16 +33,11 @@ import HelloWorld from './components/HelloWorld.vue'
 </style>
 -->
 <script lang="ts" setup>
-import { RouterView } from 'vue-router'
+import Layout from './layouts/Default.vue'
 </script>
 
 <template>
-  <div>
-    app
-  </div>
-  <div>
-    <RouterView />
-  </div>
+  <Layout />
 </template>
 
 <style lang="scss" scoped>
