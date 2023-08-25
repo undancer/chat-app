@@ -10,7 +10,6 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
-  "dependencies": {},
   "devDependencies": {
     "@antfu/eslint-config": "^0.41.0",
     "@vitejs/plugin-vue": "^4.3.3",
@@ -21,7 +20,7 @@
     "eslint": "^8.47.0",
     "pinia": "^2.1.6",
     "sass": "^1.66.1",
-    "typescript": "^5.1.6",
+    "typescript": "^5.2.2",
     "vite": "^4.4.9",
     "vite-plugin-windicss": "^1.9.1",
     "vue": "^3.3.4",
