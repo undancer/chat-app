@@ -16,6 +16,7 @@ import 'element-plus/dist/index.css'
 axios.defaults.timeout = 60 * 1000
 
 const app = createApp(App)
+
 for (const [name, comp] of Object.entries(ElementPlusIconsVue)) {
   app.component(name, comp)
   app.component(`ElIcon${name}`, comp)
