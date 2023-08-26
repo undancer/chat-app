@@ -1,8 +1,5 @@
 <script lang="ts" setup>
-import {
-  // defineEmits,
-  defineProps,
-} from 'vue'
+import { defineEmits, defineProps } from 'vue'
 import { LOCAL_FONTS, NETWORK_FONTS } from './fonts'
 
 interface Props {
@@ -10,9 +7,8 @@ interface Props {
 }
 
 defineProps<Props>()
-// const emit = defineEmits(['input'])
-//
-// emit('input')
+
+defineEmits(['input'])
 </script>
 
 <template>
@@ -26,7 +22,7 @@ defineProps<Props>()
   </el-select>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .el-select {
   width: 100%
 }
