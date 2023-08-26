@@ -3,8 +3,8 @@ import _ from 'lodash'
 import download from 'downloadjs'
 
 import { mergeConfig } from '../utils'
-import * as mainApi from '../api/main.ts'
-import * as chatConfig from '../api/chatConfig.ts'
+import * as mainApi from '../api/main'
+import * as chatConfig from '../api/chatConfig'
 
 export default {
   name: 'Home',

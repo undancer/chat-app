@@ -1,7 +1,4 @@
-<script lang="ts">
-export default {
-  name: 'Help',
-}
+<script lang="ts" setup>
 </script>
 
 <template>
@@ -33,7 +30,7 @@ export default {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .img-container {
   text-align: center;
 }

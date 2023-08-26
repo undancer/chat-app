@@ -4,7 +4,7 @@ import { useEventListener, useWindowSize } from '@vueuse/core'
 import Sidebar from './Sidebar.vue'
 
 // APP_VERSION: process.env.APP_VERSION,
-const APP_VERSION = 'dev?'
+const APP_VERSION = import.meta.env.APP_VERSION
 const isMobile = ref(false)
 const hideSidebar = ref(true)
 

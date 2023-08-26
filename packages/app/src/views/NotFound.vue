@@ -1,7 +1,4 @@
-<script lang="ts">
-export default {
-  name: 'NotFound',
-}
+<script lang="ts" setup>
 </script>
 
 <template>

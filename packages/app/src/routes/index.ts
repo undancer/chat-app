@@ -25,14 +25,16 @@ const routes: RouteRecordRaw[] = [
     path: '/room/test',
     name: 'test_room',
     component: Room,
-    props: route => ({ strConfig: route.query }),
+    props: (route) => {
+      return { strConfig: route.query }
+    },
   },
   {
     path: '/room/:roomId',
     name: 'room',
     component: Room,
-    props(route) {
-      let roomId = Number.parseInt(route.params.roomId)
+    props: (route) => {
+      let roomId: number | null = Number.parseInt(route.params.roomId)
       if (Number.isNaN(roomId)) {
         roomId = null
       }

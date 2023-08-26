@@ -1,18 +1,18 @@
-<script lang="ts">
-import * as fonts from './fonts.ts'
+<script lang="ts" setup>
+import {
+  // defineEmits,
+  defineProps,
+} from 'vue'
+import { LOCAL_FONTS, NETWORK_FONTS } from './fonts'
 
-export default {
-  name: 'FontSelect',
-  props: {
-    value: String,
-  },
-  data() {
-    return {
-      LOCAL_FONTS: fonts.LOCAL_FONTS,
-      NETWORK_FONTS: fonts.NETWORK_FONTS,
-    }
-  },
+interface Props {
+  value: string
 }
+
+defineProps<Props>()
+// const emit = defineEmits(['input'])
+//
+// emit('input')
 </script>
 
 <template>
