@@ -8,6 +8,7 @@ import Help from '../views/Help.vue'
 import Room from '../views/Room.vue'
 
 import NotFound from '../views/NotFound.vue'
+import Foo from '../views/Foo.vue'
 
 const history: RouterHistory = createWebHistory()
 
@@ -40,6 +41,11 @@ const routes: RouteRecordRaw[] = [
       }
       return { roomId, strConfig: route.query }
     },
+  },
+  {
+    path: '/foo',
+    name: 'foo',
+    component: Foo,
   },
   // { path: '*', component: NotFound },
   { path: '/:pathMatch(.*)*', name: 'not-found', component: NotFound },

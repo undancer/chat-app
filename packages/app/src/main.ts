@@ -12,6 +12,7 @@ import i18n from './languages'
 import 'element-plus/dist/index.css'
 
 // import './style.css'
+import 'virtual:uno.css'
 
 axios.defaults.timeout = 60 * 1000
 
@@ -26,7 +27,4 @@ app.use(ElementPlus)
 app.use(i18n)
 app.use(routes)
 app.use(stores)
-app.config.ignoredElements = [
-  /^yt-/,
-]
 app.mount('#app')

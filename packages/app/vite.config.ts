@@ -1,11 +1,24 @@
 import { defineConfig } from 'vite'
 
 import vue3 from '@vitejs/plugin-vue'
+import UnoCSS from 'unocss/vite'
+import { presetDaisy } from 'unocss-preset-daisy'
+import { presetUno } from 'unocss'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue3(),
+    vue3({
+      customElement: [
+        /^yt-/,
+      ],
+    }),
+    UnoCSS({
+      presets: [
+        presetUno(),
+        presetDaisy(),
+      ],
+    }),
   ],
   server: {
     proxy: {
