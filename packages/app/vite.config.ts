@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 import vue3 from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
 import { presetDaisy } from 'unocss-preset-daisy'
-import { presetUno } from 'unocss'
+import { presetIcons, presetUno, presetWebFonts, presetWind } from 'unocss'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,6 +16,9 @@ export default defineConfig({
     UnoCSS({
       presets: [
         presetUno(),
+        presetIcons(),
+        presetWebFonts(),
+        presetWind(),
         presetDaisy(),
       ],
     }),

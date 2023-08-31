@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { onBeforeMount, onMounted, ref } from 'vue'
 import { useEventListener, useWindowSize } from '@vueuse/core'
+import Footer from '../components/Footer.vue'
+import Drawer from '../components/Drawer.vue'
 import Sidebar from './Sidebar.vue'
 
 // APP_VERSION: process.env.APP_VERSION,
@@ -22,6 +24,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <Drawer />
   <el-container class="app-wrapper" :class="{ mobile: isMobile }">
     <div v-show="isMobile && !hideSidebar" class="drawer-bg" @click="hideSidebar = true" />
     <el-aside width="230px" class="sidebar-container" :class="{ 'hide-sidebar': hideSidebar }">
@@ -45,6 +48,7 @@ onMounted(() => {
       </keep-alive>
     </el-main>
   </el-container>
+  <Footer />
 </template>
 
 <style>
