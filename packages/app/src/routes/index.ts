@@ -1,4 +1,4 @@
-import type { RouteRecordRaw, RouterHistory } from 'vue-router'
+import type { RouteLocationNormalized, RouteRecordRaw, RouterHistory } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Default from '../layouts/Default.vue'
@@ -26,7 +26,7 @@ const routes: RouteRecordRaw[] = [
     path: '/room/test',
     name: 'test_room',
     component: Room,
-    props: (route) => {
+    props: (route: RouteLocationNormalized): Record<string, any> => {
       return { strConfig: route.query }
     },
   },
@@ -34,7 +34,7 @@ const routes: RouteRecordRaw[] = [
     path: '/room/:roomId',
     name: 'room',
     component: Room,
-    props: (route) => {
+    props: (route: RouteLocationNormalized): Record<string, any> => {
       let roomId: number | null = Number.parseInt(route.params.roomId)
       if (Number.isNaN(roomId)) {
         roomId = null
@@ -48,7 +48,11 @@ const routes: RouteRecordRaw[] = [
     component: Foo,
   },
   // { path: '*', component: NotFound },
-  { path: '/:pathMatch(.*)*', name: 'not-found', component: NotFound },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: NotFound,
+  },
 ]
 
 const router = createRouter({ history, routes })

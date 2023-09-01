@@ -15,7 +15,7 @@ export function toBool(val) {
 
 export function toInt(val, _default) {
   let res = Number.parseInt(val)
-  if (isNaN(res)) {
+  if (Number.isNaN(res)) {
     res = _default
   }
   return res

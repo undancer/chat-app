@@ -151,7 +151,7 @@ export default {
       }
     },
     onItemClick(message) {
-      if (this.pinnedMessage == message) {
+      if (this.pinnedMessage === message) {
         this.pinnedMessage = null
       } else {
         this.pinnedMessage = message

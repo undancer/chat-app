@@ -255,7 +255,7 @@ export default class ChatClientTest {
   refreshTimer() {
     // 模仿B站的消息间隔模式
     let sleepTime
-    if (randInt(0, 4) == 0) {
+    if (randInt(0, 4) === 0) {
       sleepTime = randInt(1000, 2000)
     } else {
       sleepTime = randInt(0, 400)

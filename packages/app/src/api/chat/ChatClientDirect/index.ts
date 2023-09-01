@@ -247,7 +247,7 @@ export default class ChatClientDirect {
     switch (operation) {
       case OP_SEND_MSG_REPLY: {
       // 业务消息
-        if (ver == WS_BODY_PROTOCOL_VERSION_BROTLI) {
+        if (ver === WS_BODY_PROTOCOL_VERSION_BROTLI) {
         // 压缩过的先解压
           body = brotliDecode(body)
           this.parseWsMessage(body)
@@ -288,7 +288,7 @@ export default class ChatClientDirect {
   handlerCommand(command) {
     let cmd = command.cmd || ''
     const pos = cmd.indexOf(':')
-    if (pos != -1) {
+    if (pos !== -1) {
       cmd = cmd.substr(0, pos)
     }
     const callback = CMD_CALLBACK_MAP[cmd]
