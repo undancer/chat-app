@@ -2,7 +2,7 @@
 import _ from 'lodash'
 import download from 'downloadjs'
 
-import { mergeConfig } from '../utils'
+import { mergeConfig } from '../utils/legacy'
 import * as mainApi from '../api/main'
 import * as chatConfig from '../api/chatConfig'
 

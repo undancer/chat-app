@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { mergeConfig } from '../utils'
+import { mergeConfig } from '../utils/legacy'
 
 export const DEFAULT_CONFIG = {
   minGiftPrice: 7, // $1

@@ -1,5 +1,5 @@
 <script lang="ts">
-import * as utils from '../../utils'
+import { getTimeTextHourMin } from '../../utils/legacy'
 import ImgShadow from './ImgShadow.vue'
 import * as constants from './constants.ts'
 
@@ -23,7 +23,7 @@ export default {
       return `CN¥${utils.formatCurrency(this.price)}`
     },
     timeText() {
-      return utils.getTimeTextHourMin(this.time)
+      return getTimeTextHourMin(this.time)
     },
   },
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
 import i18n from '../languages'
-import { mergeConfig, toBool, toInt } from '../utils'
-import * as trie from '../utils/trie'
+import { mergeConfig, toBool, toInt } from '../utils/legacy'
+import * as trie from '../utils/legacy/trie'
 import * as pronunciation from '../utils/pronunciation'
 import * as chatConfig from '../api/chatConfig'
 import ChatClientTest from '../api/chat/ChatClientTest'

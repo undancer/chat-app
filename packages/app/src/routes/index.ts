@@ -1,7 +1,7 @@
 import type { RouteRecordRaw, RouterHistory } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
 
-import Layout from '../layouts/index.vue'
+import Default from '../layouts/Default.vue'
 import Home from '../views/Home.vue'
 import StyleGenerator from '../views/StyleGenerator/index.vue'
 import Help from '../views/Help.vue'
@@ -15,7 +15,7 @@ const history: RouterHistory = createWebHistory()
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: Layout,
+    component: Default,
     children: [
       { path: '', component: Home },
       { path: 'stylegen', name: 'stylegen', component: StyleGenerator },

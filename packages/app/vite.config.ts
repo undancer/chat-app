@@ -4,6 +4,7 @@ import vue3 from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
 import { presetDaisy } from 'unocss-preset-daisy'
 import { presetIcons, presetUno, presetWebFonts, presetWind } from 'unocss'
+import { vitePluginVersionMark } from 'vite-plugin-version-mark'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -21,6 +22,16 @@ export default defineConfig({
         presetWind(),
         presetDaisy(),
       ],
+    }),
+    vitePluginVersionMark({
+      // name: 'test-app',
+      // version: '0.0.1',
+      // command: 'git describe --tags',
+      ifGitSHA: true,
+      ifShortSHA: true,
+      ifMeta: true,
+      ifLog: true,
+      ifGlobal: true,
     }),
   ],
   server: {

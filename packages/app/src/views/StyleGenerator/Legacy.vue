@@ -1,7 +1,7 @@
 <script lang="ts">
 import _ from 'lodash'
 
-import { mergeConfig } from '../../utils'
+import { mergeConfig } from '../../utils/legacy'
 import FontSelect from './FontSelect.vue'
 import * as common from './common.ts'
 

@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { defineEmits, defineProps } from 'vue'
 import { LOCAL_FONTS, NETWORK_FONTS } from './fonts'
 
 interface Props {

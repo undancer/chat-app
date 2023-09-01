@@ -1,5 +1,5 @@
 <script lang="ts">
-import * as utils from '../../utils'
+import { getTimeTextHourMin } from '../../utils/legacy'
 import ImgShadow from './ImgShadow.vue'
 import AuthorChip from './AuthorChip.vue'
 import * as constants from './constants.ts'
@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     timeText() {
-      return utils.getTimeTextHourMin(this.time)
+      return getTimeTextHourMin(this.time)
     },
     authorTypeText() {
       return constants.AUTHOR_TYPE_TO_TEXT[this.authorType]

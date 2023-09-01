@@ -1,5 +1,5 @@
 <script lang="ts">
-import { formatCurrency } from '../../utils'
+import { formatCurrency } from '../../utils/legacy'
 import * as chatConfig from '../../api/chatConfig.ts'
 import ImgShadow from './ImgShadow.vue'
 import MembershipItem from './MembershipItem.vue'
