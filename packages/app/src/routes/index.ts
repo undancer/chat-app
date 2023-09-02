@@ -9,6 +9,9 @@ import Room from '../views/Room.vue'
 
 import NotFound from '../views/NotFound.vue'
 import Foo from '../views/Foo.vue'
+import Bar from '../views/Bar.vue'
+import Blank from '../layouts/Blank.vue'
+import About from '../views/About.vue'
 
 const history: RouterHistory = createWebHistory()
 
@@ -46,6 +49,20 @@ const routes: RouteRecordRaw[] = [
     path: '/foo',
     name: 'foo',
     component: Foo,
+  },
+  {
+    path: '/bar',
+    name: 'bar',
+    component: Bar,
+  },
+  {
+    path: '/ui',
+    name: 'ui',
+    component: Blank,
+    children: [
+      { path: '', component: Bar },
+      { path: 'about', component: About },
+    ],
   },
   // { path: '*', component: NotFound },
   {
