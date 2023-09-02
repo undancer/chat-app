@@ -1,7 +1,8 @@
-import type { App, Plugin } from 'vue'
+import type { App } from 'vue'
+import type { SFCWithInstall } from '../types.ts'
 
-export function withInstall<T, E extends Record<string, any>>(main: T, extra?: E) {
-  (main as (T & Plugin)).install = (app: App): void => {
+export function withInstall<T, E extends Record<string, any>>(main: T, extra?: E): T {
+  (main as SFCWithInstall<T>).install = (app: App): void => {
     for (const comp of [main, ...Object.values(extra ?? {})]) {
       app.component(comp.name, comp)
     }
