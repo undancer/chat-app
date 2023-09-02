@@ -162,54 +162,91 @@ export default {
 </script>
 
 <template>
-  <yt-live-chat-ticker-renderer :hidden="showMessages.length === 0">
-    <div id="container" dir="ltr" class="style-scope yt-live-chat-ticker-renderer">
+  <yt-live-chat-ticker-renderer
+    :hidden="showMessages.length === 0"
+  >
+    <div
+      id="container"
+      dir="ltr"
+      class="style-scope yt-live-chat-ticker-renderer"
+    >
       <transition-group
-        id="items" tag="div" :css="false" class="style-scope yt-live-chat-ticker-renderer"
-        @enter="onTickerItemEnter" @leave="onTickerItemLeave"
+        id="items"
+        tag="div"
+        :css="false"
+        class="style-scope yt-live-chat-ticker-renderer"
+        @enter="onTickerItemEnter"
+        @leave="onTickerItemLeave"
       >
         <yt-live-chat-ticker-paid-message-item-renderer
-          v-for="message in showMessages" :key="message.raw.id"
-          tabindex="0" class="style-scope yt-live-chat-ticker-renderer" style="overflow: hidden;"
+          v-for="message in showMessages"
+          :key="message.raw.id"
+          tabindex="0"
+          class="style-scope yt-live-chat-ticker-renderer"
+          style="overflow: hidden;"
           @click="onItemClick(message.raw)"
         >
           <div
-            id="container" dir="ltr" class="style-scope yt-live-chat-ticker-paid-message-item-renderer" :style="{
+            id="container"
+            dir="ltr"
+            class="style-scope yt-live-chat-ticker-paid-message-item-renderer"
+            :style="{
               background: message.bgColor,
             }"
           >
             <div
-              id="content" class="style-scope yt-live-chat-ticker-paid-message-item-renderer" :style="{
+              id="content"
+              class="style-scope yt-live-chat-ticker-paid-message-item-renderer"
+              :style="{
                 color: message.color,
               }"
             >
               <ImgShadow
-                id="author-photo" height="24" width="24" class="style-scope yt-live-chat-ticker-paid-message-item-renderer"
+                id="author-photo"
+                height="24"
+                width="24"
+                class="style-scope yt-live-chat-ticker-paid-message-item-renderer"
                 :img-url="message.raw.avatarUrl"
               />
-              <span id="text" dir="ltr" class="style-scope yt-live-chat-ticker-paid-message-item-renderer">{{ message.text }}</span>
+              <span
+                id="text"
+                dir="ltr"
+                class="style-scope yt-live-chat-ticker-paid-message-item-renderer"
+              >
+                {{ message.text }}
+              </span>
             </div>
           </div>
         </yt-live-chat-ticker-paid-message-item-renderer>
       </transition-group>
     </div>
-    <template v-if="pinnedMessage">
+    <template
+      v-if="pinnedMessage"
+    >
       <MembershipItem
-        v-if="pinnedMessage.type === MESSAGE_TYPE_MEMBER" :key="pinnedMessage.id"
+        v-if="pinnedMessage.type === MESSAGE_TYPE_MEMBER"
+        :key="pinnedMessage.id"
         class="style-scope yt-live-chat-ticker-renderer"
-        :avatar-url="pinnedMessage.avatarUrl" :author-name="getShowAuthorName(pinnedMessage)" :privilege-type="pinnedMessage.privilegeType"
-        :title="pinnedMessage.title" :time="pinnedMessage.time"
+        :avatar-url="pinnedMessage.avatarUrl"
+        :author-name="getShowAuthorName(pinnedMessage)"
+        :privilege-type="pinnedMessage.privilegeType"
+        :title="pinnedMessage.title"
+        :time="pinnedMessage.time"
       />
       <PaidMessage
-        v-else :key="pinnedMessage.id"
+        v-else
+        :key="pinnedMessage.id"
         class="style-scope yt-live-chat-ticker-renderer"
-        :price="pinnedMessage.price" :avatar-url="pinnedMessage.avatarUrl" :author-name="getShowAuthorName(pinnedMessage)"
-        :time="pinnedMessage.time" :content="pinnedMessageShowContent"
+        :price="pinnedMessage.price"
+        :avatar-url="pinnedMessage.avatarUrl"
+        :author-name="getShowAuthorName(pinnedMessage)"
+        :time="pinnedMessage.time"
+        :content="pinnedMessageShowContent"
       />
     </template>
   </yt-live-chat-ticker-renderer>
 </template>
 
-<style src="../../assets/css/youtube/yt-live-chat-ticker-renderer.css"></style>
+<style src="../../assets/css/youtube/yt-live-chat-ticker-renderer.css" />
 
-<style src="../../assets/css/youtube/yt-live-chat-ticker-paid-message-item-renderer.css"></style>
+<style src="../../assets/css/youtube/yt-live-chat-ticker-paid-message-item-renderer.css" />

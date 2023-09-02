@@ -526,20 +526,43 @@ export default {
 
 <template>
   <yt-live-chat-renderer
-    class="style-scope yt-live-chat-app" style="--scrollbar-width:11px;" hide-timestamps
+    class="style-scope yt-live-chat-app"
+    style="--scrollbar-width:11px;"
+    hide-timestamps
     @mousemove="refreshCantScrollStartTime"
   >
-    <Ticker v-model:messages="paidMessages" class="style-scope yt-live-chat-renderer" :show-gift-name="showGiftName" />
-    <yt-live-chat-item-list-renderer class="style-scope yt-live-chat-renderer" allow-scroll>
-      <div id="item-scroller" ref="scroller" class="style-scope yt-live-chat-item-list-renderer animated" @scroll="onScroll">
-        <div id="item-offset" ref="itemOffset" class="style-scope yt-live-chat-item-list-renderer" style="height: 0px;">
+    <Ticker
+      v-model:messages="paidMessages"
+      class="style-scope yt-live-chat-renderer"
+      :show-gift-name="showGiftName"
+    />
+    <yt-live-chat-item-list-renderer
+      class="style-scope yt-live-chat-renderer"
+      allow-scroll
+    >
+      <div
+        id="item-scroller"
+        ref="scroller"
+        class="style-scope yt-live-chat-item-list-renderer animated"
+        @scroll="onScroll"
+      >
+        <div
+          id="item-offset"
+          ref="itemOffset"
+          class="style-scope yt-live-chat-item-list-renderer"
+          style="height: 0px;"
+        >
           <div
-            id="items" ref="items" class="style-scope yt-live-chat-item-list-renderer" style="overflow: hidden"
+            id="items"
+            ref="items"
+            class="style-scope yt-live-chat-item-list-renderer"
+            style="overflow: hidden"
             :style="{ transform: `translateY(${Math.floor(scrollPixelsRemaining)}px)` }"
           >
             <template v-for="message in messages">
               <TextMessage
-                v-if="message.type === MESSAGE_TYPE_TEXT" :key="message.id"
+                v-if="message.type === MESSAGE_TYPE_TEXT"
+                :key="message.id"
                 class="style-scope yt-live-chat-item-list-renderer"
                 :time="message.time"
                 :avatar-url="message.avatarUrl"
@@ -550,7 +573,8 @@ export default {
                 :repeated="message.repeated"
               />
               <PaidMessage
-                v-else-if="message.type === MESSAGE_TYPE_GIFT" :key="message.id"
+                v-else-if="message.type === MESSAGE_TYPE_GIFT"
+                :key="message.id"
                 class="style-scope yt-live-chat-item-list-renderer"
                 :time="message.time"
                 :avatar-url="message.avatarUrl"
@@ -559,7 +583,8 @@ export default {
                 :content="getGiftShowContent(message)"
               />
               <MembershipItem
-                v-else-if="message.type === MESSAGE_TYPE_MEMBER" :key="message.id"
+                v-else-if="message.type === MESSAGE_TYPE_MEMBER"
+                :key="message.id"
                 class="style-scope yt-live-chat-item-list-renderer"
                 :time="message.time"
                 :avatar-url="message.avatarUrl"
@@ -568,7 +593,8 @@ export default {
                 :title="message.title"
               />
               <PaidMessage
-                v-else-if="message.type === MESSAGE_TYPE_SUPER_CHAT" :key="message.id"
+                v-else-if="message.type === MESSAGE_TYPE_SUPER_CHAT"
+                :key="message.id"
                 class="style-scope yt-live-chat-item-list-renderer"
                 :time="message.time"
                 :avatar-url="message.avatarUrl"
@@ -584,8 +610,8 @@ export default {
   </yt-live-chat-renderer>
 </template>
 
-<style src="../../assets/css/youtube/yt-html.css"></style>
+<style src="../../assets/css/youtube/yt-html.css" />
 
-<style src="../../assets/css/youtube/yt-live-chat-renderer.css"></style>
+<style src="../../assets/css/youtube/yt-live-chat-renderer.css" />
 
-<style src="../../assets/css/youtube/yt-live-chat-item-list-renderer.css"></style>
+<style src="../../assets/css/youtube/yt-live-chat-item-list-renderer.css" />

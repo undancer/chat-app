@@ -56,28 +56,61 @@ export default {
 </script>
 
 <template>
-  <yt-live-chat-text-message-renderer :author-type="authorTypeText">
+  <yt-live-chat-text-message-renderer
+    :author-type="authorTypeText"
+  >
     <ImgShadow
-      id="author-photo" height="24" width="24" class="style-scope yt-live-chat-text-message-renderer"
+      id="author-photo"
+      height="24"
+      width="24"
+      class="style-scope yt-live-chat-text-message-renderer"
       :img-url="avatarUrl"
     />
-    <div id="content" class="style-scope yt-live-chat-text-message-renderer">
-      <span id="timestamp" class="style-scope yt-live-chat-text-message-renderer">{{ timeText }}</span>
+    <div
+      id="content"
+      class="style-scope yt-live-chat-text-message-renderer"
+    >
+      <span
+        id="timestamp"
+        class="style-scope yt-live-chat-text-message-renderer"
+      >
+        {{ timeText }}
+      </span>
       <AuthorChip
         class="style-scope yt-live-chat-text-message-renderer"
-        :is-in-member-message="false" :author-name="authorName" :author-type="authorType" :privilege-type="privilegeType"
+        :is-in-member-message="false"
+        :author-name="authorName"
+        :author-type="authorType"
+        :privilege-type="privilegeType"
       />
-      <span id="message" class="style-scope yt-live-chat-text-message-renderer">
-        <template v-for="(content, index) in richContent">
-          <span v-if="content.type === CONTENT_TYPE_TEXT" :key="`s-${index}`">{{ content.text }}</span>
+      <span
+        id="message"
+        class="style-scope yt-live-chat-text-message-renderer"
+      >
+        <template
+          v-for="(content, index) in richContent"
+        >
+          <span
+            v-if="content.type === CONTENT_TYPE_TEXT"
+            :key="`s-${index}`"
+          >
+            {{ content.text }}
+          </span>
           <img
-            v-else-if="content.type === CONTENT_TYPE_IMAGE" :id="`emoji-${content.text}`"
+            v-else-if="content.type === CONTENT_TYPE_IMAGE"
+            :id="`emoji-${content.text}`"
             :key="`i-${index}`"
-            class="emoji yt-formatted-string style-scope yt-live-chat-text-message-renderer" :src="content.url" :alt="content.text" :shared-tooltip-text="content.text"
+            class="emoji yt-formatted-string style-scope yt-live-chat-text-message-renderer"
+            :src="content.url"
+            :alt="content.text"
+            :shared-tooltip-text="content.text"
           >
         </template>
         <el-badge
-          v-if="repeated > 1" :value="repeated" :max="99" class="style-scope yt-live-chat-text-message-renderer"
+          v-if="repeated > 1"
+          :value="repeated"
+          :max="99"
+          class="style-scope yt-live-chat-text-message-renderer"
           :style="{ '--repeated-mark-color': repeatedMarkColor }"
         />
       </span>
@@ -85,7 +118,7 @@ export default {
   </yt-live-chat-text-message-renderer>
 </template>
 
-<style>
+<style lang="scss">
 yt-live-chat-text-message-renderer>#content>#message>.el-badge {
   margin-left: 10px;
 }
@@ -101,4 +134,4 @@ yt-live-chat-text-message-renderer>#content>#message>.el-badge .el-badge__conten
 }
 </style>
 
-<style src="../../assets/css/youtube/yt-live-chat-text-message-renderer.css"></style>
+<style src="../../assets/css/youtube/yt-live-chat-text-message-renderer.css" />

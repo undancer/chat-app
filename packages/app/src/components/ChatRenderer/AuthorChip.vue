@@ -29,30 +29,49 @@ export default {
 <template>
   <yt-live-chat-author-chip>
     <span
-      id="author-name" dir="auto" class="style-scope yt-live-chat-author-chip" :class="{ member: isInMemberMessage }"
+      id="author-name"
+      dir="auto"
+      class="style-scope yt-live-chat-author-chip"
+      :class="{ member: isInMemberMessage }"
       :type="authorTypeText"
     >
-      <template>{{ authorName }}</template>
+      <template>
+        {{ authorName }}
+      </template>
       <!-- 这里是已验证勋章 -->
-      <span id="chip-badges" class="style-scope yt-live-chat-author-chip" />
-    </span>
-    <span id="chat-badges" class="style-scope yt-live-chat-author-chip">
-      <AuthorBadge
-        v-if="isInMemberMessage" class="style-scope yt-live-chat-author-chip"
-        :is-admin="false" :privilege-type="privilegeType"
+      <span
+        id="chip-badges"
+        class="style-scope yt-live-chat-author-chip"
       />
-      <template v-else>
+    </span>
+    <span
+      id="chat-badges"
+      class="style-scope yt-live-chat-author-chip"
+    >
+      <AuthorBadge
+        v-if="isInMemberMessage"
+        class="style-scope yt-live-chat-author-chip"
+        :is-admin="false"
+        :privilege-type="privilegeType"
+      />
+      <template
+        v-else
+      >
         <AuthorBadge
-          v-if="authorType === AUTHRO_TYPE_ADMIN" class="style-scope yt-live-chat-author-chip"
-          is-admin :privilege-type="0"
+          v-if="authorType === AUTHRO_TYPE_ADMIN"
+          class="style-scope yt-live-chat-author-chip"
+          is-admin
+          :privilege-type="0"
         />
         <AuthorBadge
-          v-if="privilegeType > 0" class="style-scope yt-live-chat-author-chip"
-          :is-admin="false" :privilege-type="privilegeType"
+          v-if="privilegeType > 0"
+          class="style-scope yt-live-chat-author-chip"
+          :is-admin="false"
+          :privilege-type="privilegeType"
         />
       </template>
     </span>
   </yt-live-chat-author-chip>
 </template>
 
-<style src="../../assets/css/youtube/yt-live-chat-author-chip.css"></style>
+<style src="../../assets/css/youtube/yt-live-chat-author-chip.css" />

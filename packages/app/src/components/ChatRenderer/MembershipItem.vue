@@ -1,27 +1,21 @@
-<script lang="ts">
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
 import { getTimeTextHourMin } from '../../utils/legacy'
 import ImgShadow from './ImgShadow.vue'
 import AuthorChip from './AuthorChip.vue'
 
-export default {
-  name: 'MembershipItem',
-  components: {
-    ImgShadow,
-    AuthorChip,
-  },
-  props: {
-    avatarUrl: String,
-    authorName: String,
-    privilegeType: Number,
-    title: String,
-    time: Date,
-  },
-  computed: {
-    timeText() {
-      return getTimeTextHourMin(this.time)
-    },
-  },
+interface Props {
+  avatarUrl: string
+  authorName: string
+  privilegeType: number
+  title: string
+  time: Date
 }
+
+const props = defineProps<Props>()
+
+const time = ref<Date>(props.time)
+const timeText = computed(() => getTimeTextHourMin(time.value))
 </script>
 
 <template>
@@ -53,4 +47,4 @@ export default {
   </yt-live-chat-membership-item-renderer>
 </template>
 
-<style src="../../assets/css/youtube/yt-live-chat-membership-item-renderer.css"></style>
+<style src="../../assets/css/youtube/yt-live-chat-membership-item-renderer.css" />

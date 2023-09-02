@@ -1,30 +1,25 @@
-<script lang="ts">
-import * as avatar from '../../api/chat/avatar.ts'
+<script lang="ts" setup>
+import { watch } from 'vue'
+import { ref } from 'vue-demi'
+import * as avatar from '../../api/chat/avatar'
 
-export default {
-  name: 'ImgShadow',
-  props: {
-    imgUrl: String,
-    height: String,
-    width: String,
-  },
-  data() {
-    return {
-      showImgUrl: this.imgUrl,
-    }
-  },
-  watch: {
-    imgUrl(val) {
-      this.showImgUrl = val
-    },
-  },
-  methods: {
-    onLoadError() {
-      if (this.showImgUrl !== avatar.DEFAULT_AVATAR_URL) {
-        this.showImgUrl = avatar.DEFAULT_AVATAR_URL
-      }
-    },
-  },
+interface Props {
+  imgUrl: string
+  height: string
+  width: string
+}
+
+const props = defineProps<Props>()
+
+const showImgUrl = ref<string>(props.imgUrl)
+
+watch(() => showImgUrl.value, (value) => {
+  showImgUrl.value = value
+})
+function onLoadError() {
+  if (showImgUrl.value !== avatar.DEFAULT_AVATAR_URL) {
+    showImgUrl.value = avatar.DEFAULT_AVATAR_URL
+  }
 }
 </script>
 
@@ -34,4 +29,4 @@ export default {
   </yt-img-shadow>
 </template>
 
-<style src="../../assets/css/youtube/yt-img-shadow.css"></style>
+<style src="../../assets/css/youtube/yt-img-shadow.css" />

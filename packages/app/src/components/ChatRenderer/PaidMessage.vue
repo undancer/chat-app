@@ -1,5 +1,5 @@
 <script lang="ts">
-import { getTimeTextHourMin } from '../../utils/legacy'
+import { formatCurrency, getTimeTextHourMin } from '../../utils/legacy'
 import ImgShadow from './ImgShadow.vue'
 import * as constants from './constants.ts'
 
@@ -20,7 +20,7 @@ export default {
       return constants.getPriceConfig(this.price).colors
     },
     priceText() {
-      return `CN¥${utils.formatCurrency(this.price)}`
+      return `CN¥${formatCurrency(this.price)}`
     },
     timeText() {
       return getTimeTextHourMin(this.time)
@@ -31,8 +31,10 @@ export default {
 
 <template>
   <yt-live-chat-paid-message-renderer
-    class="style-scope yt-live-chat-item-list-renderer" allow-animations
-    :show-only-header="!content" :style="{
+    class="style-scope yt-live-chat-item-list-renderer"
+    allow-animations
+    :show-only-header="!content"
+    :style="{
       '--yt-live-chat-paid-message-primary-color': color.contentBg,
       '--yt-live-chat-paid-message-secondary-color': color.headerBg,
       '--yt-live-chat-paid-message-header-color': color.header,
@@ -41,26 +43,59 @@ export default {
       '--yt-live-chat-paid-message-color': color.content,
     }"
   >
-    <div id="card" class="style-scope yt-live-chat-paid-message-renderer">
-      <div id="header" class="style-scope yt-live-chat-paid-message-renderer">
+    <div
+      id="card"
+      class="style-scope yt-live-chat-paid-message-renderer"
+    >
+      <div
+        id="header"
+        class="style-scope yt-live-chat-paid-message-renderer"
+      >
         <ImgShadow
-          id="author-photo" height="40" width="40" class="style-scope yt-live-chat-paid-message-renderer"
+          id="author-photo"
+          width="40"
+          height="40"
+          class="style-scope yt-live-chat-paid-message-renderer"
           :img-url="avatarUrl"
         />
-        <div id="header-content" class="style-scope yt-live-chat-paid-message-renderer">
-          <div id="header-content-primary-column" class="style-scope yt-live-chat-paid-message-renderer">
-            <div id="author-name" class="style-scope yt-live-chat-paid-message-renderer">
+        <div
+          id="header-content"
+          class="style-scope yt-live-chat-paid-message-renderer"
+        >
+          <div
+            id="header-content-primary-column"
+            class="style-scope yt-live-chat-paid-message-renderer"
+          >
+            <div
+              id="author-name"
+              class="style-scope yt-live-chat-paid-message-renderer"
+            >
               {{ authorName }}
             </div>
-            <div id="purchase-amount" class="style-scope yt-live-chat-paid-message-renderer">
+            <div
+              id="purchase-amount"
+              class="style-scope yt-live-chat-paid-message-renderer"
+            >
               {{ priceText }}
             </div>
           </div>
-          <span id="timestamp" class="style-scope yt-live-chat-paid-message-renderer">{{ timeText }}</span>
+          <span
+            id="timestamp"
+            class="style-scope yt-live-chat-paid-message-renderer"
+          >
+            {{ timeText }}
+          </span>
         </div>
       </div>
-      <div id="content" class="style-scope yt-live-chat-paid-message-renderer">
-        <div id="message" dir="auto" class="style-scope yt-live-chat-paid-message-renderer">
+      <div
+        id="content"
+        class="style-scope yt-live-chat-paid-message-renderer"
+      >
+        <div
+          id="message"
+          dir="auto"
+          class="style-scope yt-live-chat-paid-message-renderer"
+        >
           {{ content }}
         </div>
       </div>
@@ -68,4 +103,4 @@ export default {
   </yt-live-chat-paid-message-renderer>
 </template>
 
-<style src="../../assets/css/youtube/yt-live-chat-paid-message-renderer.css"></style>
+<style src="../../assets/css/youtube/yt-live-chat-paid-message-renderer.css" />
