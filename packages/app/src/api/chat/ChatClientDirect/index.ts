@@ -3,6 +3,7 @@ import axios from 'axios'
 import * as avatar from '../avatar'
 
 import { getUuid4Hex } from '../../../utils'
+import type { ChatClient, ChatClient3 } from '../ChatClient'
 import { brotliDecode } from './brotli_decode'
 
 const HEADER_SIZE = 16
@@ -43,7 +44,7 @@ const RECEIVE_TIMEOUT = HEARTBEAT_INTERVAL + (5 * 1000)
 const textEncoder = new TextEncoder()
 const textDecoder = new TextDecoder()
 
-export default class ChatClientDirect {
+export default class ChatClientDirect implements ChatClient, ChatClient3 {
   constructor(roomId) {
     // 调用initRoom后初始化，如果失败，使用这里的默认值
     this.roomId = roomId
@@ -185,7 +186,7 @@ export default class ChatClientDirect {
     window.setTimeout(this.wsConnect.bind(this), 1000)
   }
 
-  onWsMessage(event) {
+  onWsMessage(event: MessageEvent<any>) {
     if (!(event.data instanceof ArrayBuffer)) {
       console.warn('未知的websocket消息类型，data=', event.data)
       return
@@ -325,7 +326,7 @@ export default class ChatClientDirect {
       authorType = 0
     }
 
-    let textEmoticons = this.parseTextEmoticons(info)
+    const textEmoticons = this.parseTextEmoticons(info)
 
     const data = {
       avatarUrl: await avatar.getAvatarUrl(uid),
@@ -342,27 +343,24 @@ export default class ChatClientDirect {
       id: getUuid4Hex(),
       translation: '',
       emoticon: info[0][13].url || null,
-      textEmoticons: textEmoticons,
+      textEmoticons,
     }
     this.onAddText(data)
   }
 
-
   parseTextEmoticons(info) {
     try {
-      let modeInfo = info[0][15]
-      let extra = JSON.parse(modeInfo.extra)
+      const modeInfo = info[0][15]
+      const extra = JSON.parse(modeInfo.extra)
       if (!extra.emots) {
         return []
       }
-      let res = Object.values(extra.emots).map(emoticon => [emoticon.descript, emoticon.url])
+      const res = Object.values(extra.emots).map(emoticon => [emoticon.descript, emoticon.url])
       return res
     } catch {
       return []
     }
   }
-
-
 
   sendGiftCallback(command) {
     if (!this.onAddGift) {

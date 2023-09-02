@@ -1,32 +1,29 @@
-<script lang="ts">
-import { useI18n } from 'vue-i18n'
+<script lang="ts" setup>
+import { computed } from 'vue-demi'
+import i18n from '../../../languages'
 import {
   getShowGuardLevelText,
 } from './utils'
 
-const { t } = useI18n()
-
-export default {
-  name: 'AuthorBadge',
-  props: {
-    isAdmin: Boolean,
-    privilegeType: Number,
-  },
-  computed: {
-    authorTypeText() {
-      if (this.isAdmin) {
-        return 'moderator'
-      }
-      return this.privilegeType > 0 ? 'member' : ''
-    },
-    readableAuthorTypeText() {
-      if (this.isAdmin) {
-        return t('chat.moderator')
-      }
-      return getShowGuardLevelText(this.privilegeType)
-    },
-  },
+interface Props {
+  isAdmin: boolean
+  privilegeType: number
 }
+const props = defineProps<Props>()
+
+const authorTypeText = computed(() => {
+  if (props.isAdmin) {
+    return 'moderator'
+  }
+  return props.privilegeType > 0 ? 'member' : ''
+})
+
+const readableAuthorTypeText = computed(() => {
+  if (props.isAdmin) {
+    return i18n.global.t('chat.moderator')
+  }
+  return getShowGuardLevelText(props.privilegeType)
+})
 </script>
 
 <template>

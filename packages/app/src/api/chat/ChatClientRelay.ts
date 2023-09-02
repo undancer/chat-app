@@ -1,3 +1,5 @@
+import type { ChatClient, ChatClient1 } from './ChatClient'
+
 const COMMAND_HEARTBEAT = 0
 const COMMAND_JOIN_ROOM = 1
 const COMMAND_ADD_TEXT = 2
@@ -12,7 +14,7 @@ const CONTENT_TYPE_EMOTICON = 1
 
 const RECEIVE_TIMEOUT = 15 * 1000
 
-export default class ChatClientRelay {
+export default class ChatClientRelay implements ChatClient, ChatClient1 {
   constructor(roomId, autoTranslate) {
     this.roomId = roomId
     this.autoTranslate = autoTranslate
@@ -98,8 +100,7 @@ export default class ChatClientRelay {
     window.setTimeout(this.wsConnect.bind(this), 1000)
   }
 
-  onWsMessage(event) {
-
+  onWsMessage(event: MessageEvent<any>) {
     let { cmd, data } = JSON.parse(event.data)
     switch (cmd) {
       case COMMAND_HEARTBEAT: {

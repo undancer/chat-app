@@ -1,4 +1,7 @@
-import { getUuid4Hex } from '../../utils'
+import {
+  getUuid4Hex,
+  randInt,
+} from '../../utils'
 import {
   AUTHRO_TYPE_ADMIN,
   AUTHRO_TYPE_MEMBER,
@@ -9,7 +12,8 @@ import {
   MESSAGE_TYPE_SUPER_CHAT,
   MESSAGE_TYPE_TEXT,
 } from '../../components/chat-renderer/src/constants'
-import * as avatar from './avatar.ts'
+import type { ChatClient, ChatClient2 } from './ChatClient'
+import { DEFAULT_AVATAR_URL } from './avatar'
 
 const NAMES = [
   '光羊',
@@ -113,7 +117,7 @@ const MESSAGE_GENERATORS = [
         type: MESSAGE_TYPE_TEXT,
         message: {
           ...randGuardInfo(),
-          avatarUrl: avatar.DEFAULT_AVATAR_URL,
+          avatarUrl: DEFAULT_AVATAR_URL,
           timestamp: new Date().getTime() / 1000,
           authorName: randomChoose(NAMES),
           content: randomChoose(CONTENTS),
@@ -138,7 +142,7 @@ const MESSAGE_GENERATORS = [
         type: MESSAGE_TYPE_TEXT,
         message: {
           ...randGuardInfo(),
-          avatarUrl: avatar.DEFAULT_AVATAR_URL,
+          avatarUrl: DEFAULT_AVATAR_URL,
           timestamp: new Date().getTime() / 1000,
           authorName: randomChoose(NAMES),
           content: '',
@@ -164,7 +168,7 @@ const MESSAGE_GENERATORS = [
         message: {
           ...randomChoose(GIFT_INFO_LIST),
           id: getUuid4Hex(),
-          avatarUrl: avatar.DEFAULT_AVATAR_URL,
+          avatarUrl: DEFAULT_AVATAR_URL,
           timestamp: new Date().getTime() / 1000,
           authorName: randomChoose(NAMES),
           num: 1,
@@ -180,7 +184,7 @@ const MESSAGE_GENERATORS = [
         type: MESSAGE_TYPE_SUPER_CHAT,
         message: {
           id: getUuid4Hex(),
-          avatarUrl: avatar.DEFAULT_AVATAR_URL,
+          avatarUrl: DEFAULT_AVATAR_URL,
           timestamp: new Date().getTime() / 1000,
           authorName: randomChoose(NAMES),
           price: randomChoose(SC_PRICES),
@@ -198,7 +202,7 @@ const MESSAGE_GENERATORS = [
         type: MESSAGE_TYPE_MEMBER,
         message: {
           id: getUuid4Hex(),
-          avatarUrl: avatar.DEFAULT_AVATAR_URL,
+          avatarUrl: DEFAULT_AVATAR_URL,
           timestamp: new Date().getTime() / 1000,
           authorName: randomChoose(NAMES),
           privilegeType: randInt(1, 3),
@@ -218,11 +222,11 @@ function randomChoose(nodes) {
     }
   }
 
-  let totalWeight = 0
+  let totalWeight: number = 0
   for (const node of nodes) {
     totalWeight += node.weight
   }
-  let remainWeight = randInt(1, totalWeight)
+  let remainWeight: number = randInt(1, totalWeight)
   for (const node of nodes) {
     remainWeight -= node.weight
     if (remainWeight > 0) {
@@ -236,11 +240,7 @@ function randomChoose(nodes) {
   return null
 }
 
-function randInt(min, max) {
-  return Math.floor(min + ((max - min + 1) * Math.random()))
-}
-
-export default class ChatClientTest {
+export default class ChatClientTest implements ChatClient, ChatClient2 {
   constructor() {
     this.onAddText = null
     this.onAddGift = null

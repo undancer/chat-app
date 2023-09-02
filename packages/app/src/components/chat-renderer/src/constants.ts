@@ -1,7 +1,18 @@
-export const AUTHRO_TYPE_NORMAL = 0
-export const AUTHRO_TYPE_MEMBER = 1
-export const AUTHRO_TYPE_ADMIN = 2
-export const AUTHRO_TYPE_OWNER = 3
+export enum AuthorType {
+  Normal = 0,
+  Member,
+  Admin,
+  Owner,
+}
+
+export const AUTHOR_TYPE_NORMAL = AuthorType.Normal
+export const AUTHOR_TYPE_MEMBER = AuthorType.Member
+export const AUTHOR_TYPE_ADMIN = AuthorType.Admin
+export const AUTHOR_TYPE_OWNER = AuthorType.Owner
+export const AUTHRO_TYPE_NORMAL = AUTHOR_TYPE_NORMAL
+export const AUTHRO_TYPE_MEMBER = AUTHOR_TYPE_MEMBER
+export const AUTHRO_TYPE_ADMIN = AUTHOR_TYPE_ADMIN
+export const AUTHRO_TYPE_OWNER = AUTHOR_TYPE_OWNER
 
 export const AUTHOR_TYPE_TO_TEXT = [
   '',
