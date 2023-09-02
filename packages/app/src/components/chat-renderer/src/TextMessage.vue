@@ -1,5 +1,5 @@
 <script lang="ts">
-import { getTimeTextHourMin } from '../../utils/legacy'
+import { getTimeTextHourMin } from '../../../utils'
 import ImgShadow from './ImgShadow.vue'
 import AuthorChip from './AuthorChip.vue'
 import * as constants from './constants.ts'
@@ -134,4 +134,4 @@ yt-live-chat-text-message-renderer>#content>#message>.el-badge .el-badge__conten
 }
 </style>
 
-<style src="../../assets/css/youtube/yt-live-chat-text-message-renderer.css" />
+<style src="../../../assets/css/youtube/yt-live-chat-text-message-renderer.css" />

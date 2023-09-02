@@ -1,14 +1,14 @@
 <script lang="ts">
 import i18n from '../languages'
-import { mergeConfig, toBool, toInt } from '../utils/legacy'
+import { mergeConfig, toBool, toInt } from '../utils'
 import * as trie from '../utils/legacy/trie'
 import * as pronunciation from '../utils/pronunciation'
 import * as chatConfig from '../api/chatConfig'
 import ChatClientTest from '../api/chat/ChatClientTest'
 import ChatClientDirect from '../api/chat/ChatClientDirect'
 import ChatClientRelay from '../api/chat/ChatClientRelay'
-import ChatRenderer from '../components/ChatRenderer/index.vue'
-import * as constants from '../components/ChatRenderer/constants'
+import ChatRenderer from '../components/chat-renderer'
+import * as constants from '../components/chat-renderer/src/constants'
 
 export default {
   name: 'Room',

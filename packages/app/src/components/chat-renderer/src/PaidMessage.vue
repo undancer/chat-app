@@ -1,5 +1,5 @@
 <script lang="ts">
-import { formatCurrency, getTimeTextHourMin } from '../../utils/legacy'
+import { formatCurrency, getTimeTextHourMin } from '../../../utils'
 import ImgShadow from './ImgShadow.vue'
 import * as constants from './constants.ts'
 
@@ -103,4 +103,4 @@ export default {
   </yt-live-chat-paid-message-renderer>
 </template>
 
-<style src="../../assets/css/youtube/yt-live-chat-paid-message-renderer.css" />
+<style src="../../../assets/css/youtube/yt-live-chat-paid-message-renderer.css" />

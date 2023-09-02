@@ -1,5 +1,5 @@
 <script lang="ts">
-import * as chatConfig from '../../api/chatConfig'
+import * as chatConfig from '../../../api/chatConfig'
 import Ticker from './Ticker.vue'
 import TextMessage from './TextMessage.vue'
 import MembershipItem from './MembershipItem.vue'
@@ -610,8 +610,8 @@ export default {
   </yt-live-chat-renderer>
 </template>
 
-<style src="../../assets/css/youtube/yt-html.css" />
+<style src="../../../assets/css/youtube/yt-html.css" />
 
-<style src="../../assets/css/youtube/yt-live-chat-renderer.css" />
+<style src="../../../assets/css/youtube/yt-live-chat-renderer.css" />
 
-<style src="../../assets/css/youtube/yt-live-chat-item-list-renderer.css" />
+<style src="../../../assets/css/youtube/yt-live-chat-item-list-renderer.css" />

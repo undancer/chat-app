@@ -1,7 +1,6 @@
 <script lang="ts" setup>
-import { watch } from 'vue'
-import { ref } from 'vue-demi'
-import * as avatar from '../../api/chat/avatar'
+import { ref, watch } from 'vue-demi'
+import * as avatar from '../../../api/chat/avatar'
 
 interface Props {
   imgUrl: string
@@ -29,4 +28,4 @@ function onLoadError() {
   </yt-img-shadow>
 </template>
 
-<style src="../../assets/css/youtube/yt-img-shadow.css" />
+<style src="../../../assets/css/youtube/yt-img-shadow.css" />

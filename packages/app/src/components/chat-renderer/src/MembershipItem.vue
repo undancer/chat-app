@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import { getTimeTextHourMin } from '../../utils/legacy'
+import { getTimeTextHourMin } from '../../../utils'
 import ImgShadow from './ImgShadow.vue'
 import AuthorChip from './AuthorChip.vue'
 
@@ -47,4 +47,4 @@ const timeText = computed(() => getTimeTextHourMin(time.value))
   </yt-live-chat-membership-item-renderer>
 </template>
 
-<style src="../../assets/css/youtube/yt-live-chat-membership-item-renderer.css" />
+<style src="../../../assets/css/youtube/yt-live-chat-membership-item-renderer.css" />

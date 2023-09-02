@@ -74,4 +74,4 @@ export default {
   </yt-live-chat-author-chip>
 </template>
 
-<style src="../../assets/css/youtube/yt-live-chat-author-chip.css" />
+<style src="../../../assets/css/youtube/yt-live-chat-author-chip.css" />
