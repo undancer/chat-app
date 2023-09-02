@@ -47,7 +47,7 @@
     "lint:eslint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore .",
     "lint:prettier": "prettier -c --ignore-path .gitignore .",
     "package": "npm run build && mkdir -p dist && zip -r dist/archive.zip app",
-    "prepare": "husky install",
+    "~prepare~": "cd ../.. && husky install packages/youtube-live-chat-flow/.husky",
     "test": "npm run lint",
     "watch:dist": "mv3-hot-reload",
     "watch:src": "webpack -w --config webpack.config.dev.js"
