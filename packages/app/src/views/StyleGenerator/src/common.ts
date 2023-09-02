@@ -1,4 +1,4 @@
-import * as fonts from './fonts'
+import { NETWORK_FONTS } from './fonts/fonts'
 
 export const FALLBACK_FONTS = ', "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\\5FAE \\8F6F \\96C5 \\9ED1 ", SimHei, Arial, sans-serif'
 
@@ -56,7 +56,7 @@ yt-live-chat-membership-item-renderer a {
 export function getImportStyle(allFonts) {
   const fontsNeedToImport = new Set()
   for (const font of allFonts) {
-    if (fonts.NETWORK_FONTS.includes(font)) {
+    if (NETWORK_FONTS.includes(font)) {
       fontsNeedToImport.add(font)
     }
   }

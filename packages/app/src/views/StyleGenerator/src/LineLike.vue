@@ -1,8 +1,8 @@
 <script lang="ts">
 import _ from 'lodash'
 
-import { mergeConfig } from '../../utils'
-import FontSelect from './FontSelect.vue'
+import { mergeConfig } from '../../../utils'
+import FontSelect from './fonts/FontSelect.vue'
 import * as common from './common.ts'
 
 export const DEFAULT_CONFIG = {

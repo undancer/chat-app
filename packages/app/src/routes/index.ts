@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Default from '../layouts/Default.vue'
 import Home from '../views/Home.vue'
-import StyleGenerator from '../views/StyleGenerator/index.vue'
+import StyleGenerator from '../views/StyleGenerator'
 import Help from '../views/Help.vue'
 import Room from '../views/Room.vue'
 
