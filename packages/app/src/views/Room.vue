@@ -30,6 +30,7 @@ export default {
       config: chatConfig.deepCloneDefaultConfig(),
       chatClient: null,
       pronunciationConverter: null,
+      textEmoticons: {}, // 官方的文本表情，运行时从弹幕消息收集
     }
   },
   computed: {
@@ -59,6 +60,9 @@ export default {
         if (emoticon.keyword !== '' && emoticon.url !== '') {
           res.set(emoticon.keyword, emoticon)
         }
+      }
+      for (let emoticon of Object.values(this.textEmoticons)) {
+        res.set(emoticon.keyword, emoticon)
       }
       return res
     },
@@ -160,6 +164,15 @@ export default {
       if (!this.config.showDanmaku || !this.filterTextMessage(data) || this.mergeSimilarText(data.content)) {
         return
       }
+
+      // 更新官方文本表情
+      for (let [keyword, url] of data.textEmoticons) {
+        if (!(keyword in this.textEmoticons)) {
+          let emoticon = { keyword, url }
+          this.$set(this.textEmoticons, keyword, emoticon)
+        }
+      }
+
       const message = {
         id: data.id,
         type: constants.MESSAGE_TYPE_TEXT,
@@ -309,8 +322,8 @@ export default {
         return richContent
       }
 
-      // 没有自定义表情，只能是文本
-      if (this.config.emoticons.length === 0) {
+      // 没有文本表情，只能是纯文本
+      if (this.config.emoticons.length === 0 && Object.keys(this.textEmoticons).length === 0) {
         richContent.push({
           type: constants.CONTENT_TYPE_TEXT,
           text: data.content,
@@ -318,7 +331,7 @@ export default {
         return richContent
       }
 
-      // 可能含有自定义表情，需要解析
+      // 可能含有文本表情，需要解析
       const emoticonsTrie = this.emoticonsTrie
       let startPos = 0
       let pos = 0
