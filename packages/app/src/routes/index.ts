@@ -46,22 +46,13 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: '/foo',
-    name: 'foo',
-    component: Foo,
-  },
-  {
-    path: '/bar',
-    name: 'bar',
-    component: Bar,
-  },
-  {
     path: '/ui',
     name: 'ui',
     component: Blank,
     children: [
-      { path: '', component: Bar },
-      { path: 'about', component: About },
+      { path: '', component: About },
+      { path: 'foo', component: Foo },
+      { path: 'bar', component: Bar },
     ],
   },
   // { path: '*', component: NotFound },
