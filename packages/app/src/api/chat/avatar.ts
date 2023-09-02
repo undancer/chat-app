@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const DEFAULT_AVATAR_URL = '//static.hdslb.com/images/member/noface.gif'
 
-export function processAvatarUrl(avatarUrl) {
+export function processAvatarUrl(avatarUrl: string) {
   // 去掉协议，兼容HTTP、HTTPS
   const m = avatarUrl.match(/(?:https?:)?(.*)/)
   if (m) {
@@ -15,7 +15,7 @@ export function processAvatarUrl(avatarUrl) {
   return avatarUrl
 }
 
-export async function getAvatarUrl(uid) {
+export async function getAvatarUrl(uid: number) {
   let res
   try {
     res = (await axios.get('/api/avatar_url', {

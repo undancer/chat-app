@@ -36,13 +36,13 @@ export interface ChatClient3 extends ChatClient {
   discardWebsocket(): void
   onWsClose(): void
   onWsMessage(event: MessageEvent): void
-  parseWsMessage(data): void
-  parseBusinessMessage(dataView, body): void
-  handlerCommand(command): void
-  danmuMsgCallback(command): void
+  parseWsMessage(data: any): void
+  parseBusinessMessage(dataView: DataView, body: any): void
+  handlerCommand(command: any): void
+  danmuMsgCallback(command: any): void
   parseTextEmoticons(info: any): any[]
-  sendGiftCallback(command): void
-  guardBuyCallback(command): void
-  superChatMessageCallback(command): void
-  superChatMessageDeleteCallback(command): void
+  sendGiftCallback(command: any): void
+  guardBuyCallback(command: any): void
+  superChatMessageCallback(command: any): void
+  superChatMessageDeleteCallback(command: any): void
 }

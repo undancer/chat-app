@@ -44,8 +44,25 @@ const RECEIVE_TIMEOUT = HEARTBEAT_INTERVAL + (5 * 1000)
 const textEncoder = new TextEncoder()
 const textDecoder = new TextDecoder()
 
+type AnyFn = (...args: any[]) => any
+
 export default class ChatClientDirect implements ChatClient, ChatClient3 {
-  constructor(roomId) {
+  private roomId: number
+  private roomOwnerUid: number
+  private hostServerList: { port: number; ws_port: number; host: string; wss_port: number }[]
+  private isDestroying: boolean
+  private websocket: WebSocket | null
+  private retryCount: number
+  private receiveTimeoutTimerId: number | null
+  private heartbeatTimerId: number | null
+  private onAddText: AnyFn | null
+  private onAddGift: AnyFn | null
+  private onAddMember: AnyFn | null
+  private onAddSuperChat: AnyFn | null
+  private onDelSuperChat: AnyFn | null
+  private onUpdateTranslation: AnyFn | null
+
+  constructor(roomId: number) {
     // 调用initRoom后初始化，如果失败，使用这里的默认值
     this.roomId = roomId
     this.roomOwnerUid = 0
@@ -97,7 +114,7 @@ export default class ChatClientDirect implements ChatClient, ChatClient3 {
     }
   }
 
-  makePacket(data, operation) {
+  makePacket(data: any, operation: any) {
     const body = textEncoder.encode(JSON.stringify(data))
     const header = new ArrayBuffer(HEADER_SIZE)
     const headerView = new DataView(header)
@@ -117,7 +134,7 @@ export default class ChatClientDirect implements ChatClient, ChatClient3 {
       platform: 'web',
       type: 2,
     }
-    this.websocket.send(this.makePacket(authParams, OP_AUTH))
+    this.websocket?.send(this.makePacket(authParams, OP_AUTH))
   }
 
   wsConnect() {
@@ -140,7 +157,7 @@ export default class ChatClientDirect implements ChatClient, ChatClient3 {
   }
 
   sendHeartbeat() {
-    this.websocket.send(this.makePacket({}, OP_HEARTBEAT))
+    this.websocket?.send(this.makePacket({}, OP_HEARTBEAT))
   }
 
   refreshReceiveTimeoutTimer() {
@@ -162,8 +179,10 @@ export default class ChatClientDirect implements ChatClient, ChatClient3 {
     }
 
     // 直接丢弃阻塞的websocket，不等onclose回调了
-    this.websocket.onopen = this.websocket.onclose = this.websocket.onmessage = null
-    this.websocket.close()
+    this.websocket!.onopen = null
+    this.websocket!.onclose = null
+    this.websocket!.onmessage = null
+    this.websocket!.close()
     this.onWsClose()
   }
 
@@ -199,7 +218,7 @@ export default class ChatClientDirect implements ChatClient, ChatClient3 {
     this.retryCount = 0
   }
 
-  parseWsMessage(data) {
+  parseWsMessage(data: any) {
     let offset = 0
     let dataView = new DataView(data.buffer)
     let packLen = dataView.getUint32(0)
@@ -241,7 +260,7 @@ export default class ChatClientDirect implements ChatClient, ChatClient3 {
     }
   }
 
-  parseBusinessMessage(dataView, body) {
+  parseBusinessMessage(dataView: DataView, body: any) {
     const ver = dataView.getUint16(6)
     const operation = dataView.getUint32(8)
 
@@ -286,19 +305,21 @@ export default class ChatClientDirect implements ChatClient, ChatClient3 {
     }
   }
 
-  handlerCommand(command) {
+  handlerCommand(command: any) {
     let cmd = command.cmd || ''
     const pos = cmd.indexOf(':')
     if (pos !== -1) {
       cmd = cmd.substr(0, pos)
     }
+
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     const callback = CMD_CALLBACK_MAP[cmd]
     if (callback) {
       callback.call(this, command)
     }
   }
 
-  async danmuMsgCallback(command) {
+  async danmuMsgCallback(command: any) {
     if (!this.onAddText) {
       return
     }
@@ -348,7 +369,7 @@ export default class ChatClientDirect implements ChatClient, ChatClient3 {
     this.onAddText(data)
   }
 
-  parseTextEmoticons(info) {
+  parseTextEmoticons(info: any) {
     try {
       const modeInfo = info[0][15]
       const extra = JSON.parse(modeInfo.extra)
@@ -362,7 +383,7 @@ export default class ChatClientDirect implements ChatClient, ChatClient3 {
     }
   }
 
-  sendGiftCallback(command) {
+  sendGiftCallback(command: any) {
     if (!this.onAddGift) {
       return
     }
@@ -383,7 +404,7 @@ export default class ChatClientDirect implements ChatClient, ChatClient3 {
     this.onAddGift(data)
   }
 
-  async guardBuyCallback(command) {
+  async guardBuyCallback(command: any) {
     if (!this.onAddMember) {
       return
     }
@@ -399,7 +420,7 @@ export default class ChatClientDirect implements ChatClient, ChatClient3 {
     this.onAddMember(data)
   }
 
-  superChatMessageCallback(command) {
+  superChatMessageCallback(command: any) {
     if (!this.onAddSuperChat) {
       return
     }
@@ -417,7 +438,7 @@ export default class ChatClientDirect implements ChatClient, ChatClient3 {
     this.onAddSuperChat(data)
   }
 
-  superChatMessageDeleteCallback(command) {
+  superChatMessageDeleteCallback(command: any) {
     if (!this.onDelSuperChat) {
       return
     }

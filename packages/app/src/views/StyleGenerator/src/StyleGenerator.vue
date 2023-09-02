@@ -2,6 +2,7 @@
 import _ from 'lodash'
 
 import Room from '../../Room.vue'
+import i18n from '../../../languages'
 import Legacy from './Legacy.vue'
 import LineLike from './LineLike.vue'
 
@@ -35,6 +36,9 @@ export default {
     }
   },
   computed: {
+    i18n() {
+      return i18n
+    },
     // 子组件的结果
     subComponentResult() {
       return this.subComponentResults[this.activeTab]
@@ -93,29 +97,61 @@ export default {
 </script>
 
 <template>
-  <el-row :gutter="20">
-    <el-col :sm="24" :md="16">
-      <el-tabs v-model="activeTab">
-        <el-tab-pane :label="$t('stylegen.legacy')" name="legacy">
-          <Legacy ref="legacy" v-model="subComponentResults.legacy" />
+  <el-row
+    :gutter="20"
+  >
+    <el-col
+      :sm="24"
+      :md="16"
+    >
+      <el-tabs
+        v-model="activeTab"
+      >
+        <el-tab-pane
+          :label="i18n.global.t('stylegen.legacy')"
+          name="legacy"
+        >
+          <Legacy
+            ref="legacy"
+            v-model="subComponentResults.legacy"
+          />
         </el-tab-pane>
-        <el-tab-pane :label="$t('stylegen.lineLike')" name="lineLike">
-          <LineLike ref="lineLike" v-model="subComponentResults.lineLike" />
+        <el-tab-pane
+          :label="i18n.global.t('stylegen.lineLike')"
+          name="lineLike"
+        >
+          <LineLike
+            ref="lineLike"
+            v-model="subComponentResults.lineLike"
+          />
         </el-tab-pane>
       </el-tabs>
 
-      <el-form label-width="150px" size="mini">
-        <h3>{{ $t('stylegen.result') }}</h3>
+      <el-form
+        label-width="150px"
+        size="mini"
+      >
+        <h3>{{ i18n.global.t('stylegen.result') }}</h3>
         <el-card shadow="never">
           <el-form-item label="CSS">
-            <el-input ref="result" v-model="inputResult" type="textarea" :rows="20" />
+            <el-input
+              ref="result"
+              v-model="inputResult"
+              type="textarea"
+              :rows="20"
+            />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="copyResult">
-              {{ $t('stylegen.copy') }}
+            <el-button
+              type="primary"
+              @click="copyResult"
+            >
+              {{ i18n.global.t('stylegen.copy') }}
             </el-button>
-            <el-button @click="resetConfig">
-              {{ $t('stylegen.resetConfig') }}
+            <el-button
+              @click="resetConfig"
+            >
+              {{ i18n.global.t('stylegen.resetConfig') }}
             </el-button>
           </el-form-item>
         </el-card>
@@ -125,15 +161,33 @@ export default {
     <el-col :sm="24" :md="8">
       <div :style="{ position: 'relative', top: `${exampleTop}px` }">
         <el-form inline style="line-height: 40px">
-          <el-form-item :label="$t('stylegen.playAnimation')" style="margin: 0">
-            <el-switch v-model="playAnimation" @change="onPlayAnimationChange" />
+          <el-form-item
+            :label="i18n.global.t('stylegen.playAnimation')"
+            style="margin: 0"
+          >
+            <el-switch
+              v-model="playAnimation"
+              @change="onPlayAnimationChange"
+            />
           </el-form-item>
-          <el-form-item :label="$t('stylegen.backgrounds')" style="margin: 0 0 0 30px">
-            <el-switch v-model="exampleBgLight" :active-text="$t('stylegen.light')" :inactive-text="$t('stylegen.dark')" />
+          <el-form-item
+            :label="i18n.global.t('stylegen.backgrounds')"
+            style="margin: 0 0 0 30px"
+          >
+            <el-switch
+              v-model="exampleBgLight"
+              :active-text="i18n.global.t('stylegen.light')"
+              :inactive-text="i18n.global.t('stylegen.dark')"
+            />
           </el-form-item>
         </el-form>
-        <div id="example-container" :class="{ light: exampleBgLight }">
-          <div id="fakebody">
+        <div
+          id="example-container"
+          :class="{ light: exampleBgLight }"
+        >
+          <div
+            id="fakebody"
+          >
             <Room ref="room" />
           </div>
         </div>
@@ -148,15 +202,15 @@ export default {
 
   background-color: #444;
   background-image:
-    -moz-linear-gradient(45deg, #333 25%, transparent 25%),
-    -moz-linear-gradient(-45deg, #333 25%, transparent 25%),
-    -moz-linear-gradient(45deg, transparent 75%, #333 75%),
-    -moz-linear-gradient(-45deg, transparent 75%, #333 75%);
+      -moz-linear-gradient(45deg, #333 25%, transparent 25%),
+      -moz-linear-gradient(-45deg, #333 25%, transparent 25%),
+      -moz-linear-gradient(45deg, transparent 75%, #333 75%),
+      -moz-linear-gradient(-45deg, transparent 75%, #333 75%);
   background-image:
-    -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, #333), color-stop(.25, transparent)),
-    -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, #333), color-stop(.25, transparent)),
-    -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, transparent), color-stop(.75, #333)),
-    -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, #333));
+      -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, #333), color-stop(.25, transparent)),
+      -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, #333), color-stop(.25, transparent)),
+      -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, transparent), color-stop(.75, #333)),
+      -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, #333));
 
   -moz-background-size: 32px 32px;
   background-size: 32px 32px;
@@ -173,15 +227,15 @@ export default {
 #example-container.light {
   background-color: #ddd;
   background-image:
-    -moz-linear-gradient(45deg, #eee 25%, transparent 25%),
-    -moz-linear-gradient(-45deg, #eee 25%, transparent 25%),
-    -moz-linear-gradient(45deg, transparent 75%, #eee 75%),
-    -moz-linear-gradient(-45deg, transparent 75%, #eee 75%);
+      -moz-linear-gradient(45deg, #eee 25%, transparent 25%),
+      -moz-linear-gradient(-45deg, #eee 25%, transparent 25%),
+      -moz-linear-gradient(45deg, transparent 75%, #eee 75%),
+      -moz-linear-gradient(-45deg, transparent 75%, #eee 75%);
   background-image:
-    -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, #eee), color-stop(.25, transparent)),
-    -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, #eee), color-stop(.25, transparent)),
-    -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, transparent), color-stop(.75, #eee)),
-    -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, #eee));
+      -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, #eee), color-stop(.25, transparent)),
+      -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, #eee), color-stop(.25, transparent)),
+      -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, transparent), color-stop(.75, #eee)),
+      -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, #eee));
 }
 
 #fakebody {
