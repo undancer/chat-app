@@ -1,6 +1,10 @@
 <script lang="ts">
 import i18n from '../languages'
-import { mergeConfig, toBool, toInt } from '../utils'
+import {
+  mergeConfig,
+  toBool,
+  toInt,
+} from '../utils'
 import * as trie from '../utils/legacy/trie'
 import * as pronunciation from '../utils/pronunciation'
 import * as chatConfig from '../api/chatConfig'
@@ -8,7 +12,14 @@ import ChatClientTest from '../api/chat/ChatClientTest'
 import ChatClientDirect from '../api/chat/ChatClientDirect'
 import ChatClientRelay from '../api/chat/ChatClientRelay'
 import ChatRenderer from '../components/chat-renderer'
-import * as constants from '../components/chat-renderer/src/constants'
+import {
+  CONTENT_TYPE_IMAGE,
+  CONTENT_TYPE_TEXT,
+  MESSAGE_TYPE_GIFT,
+  MESSAGE_TYPE_MEMBER,
+  MESSAGE_TYPE_SUPER_CHAT,
+  MESSAGE_TYPE_TEXT,
+} from '../components/chat-renderer/src/constants'
 
 export default {
   name: 'Room',
@@ -61,7 +72,7 @@ export default {
           res.set(emoticon.keyword, emoticon)
         }
       }
-      for (let emoticon of Object.values(this.textEmoticons)) {
+      for (const emoticon of Object.values(this.textEmoticons)) {
         res.set(emoticon.keyword, emoticon)
       }
       return res
@@ -166,16 +177,16 @@ export default {
       }
 
       // 更新官方文本表情
-      for (let [keyword, url] of data.textEmoticons) {
+      for (const [keyword, url] of data.textEmoticons) {
         if (!(keyword in this.textEmoticons)) {
-          let emoticon = { keyword, url }
+          const emoticon = { keyword, url }
           this.$set(this.textEmoticons, keyword, emoticon)
         }
       }
 
       const message = {
         id: data.id,
-        type: constants.MESSAGE_TYPE_TEXT,
+        type: MESSAGE_TYPE_TEXT,
         avatarUrl: data.avatarUrl,
         time: new Date(data.timestamp * 1000),
         authorName: data.authorName,
@@ -201,7 +212,7 @@ export default {
       }
       const message = {
         id: data.id,
-        type: constants.MESSAGE_TYPE_GIFT,
+        type: MESSAGE_TYPE_GIFT,
         avatarUrl: data.avatarUrl,
         time: new Date(data.timestamp * 1000),
         authorName: data.authorName,
@@ -218,7 +229,7 @@ export default {
       }
       const message = {
         id: data.id,
-        type: constants.MESSAGE_TYPE_MEMBER,
+        type: MESSAGE_TYPE_MEMBER,
         avatarUrl: data.avatarUrl,
         time: new Date(data.timestamp * 1000),
         authorName: data.authorName,
@@ -237,7 +248,7 @@ export default {
       }
       const message = {
         id: data.id,
-        type: constants.MESSAGE_TYPE_SUPER_CHAT,
+        type: MESSAGE_TYPE_SUPER_CHAT,
         avatarUrl: data.avatarUrl,
         authorName: data.authorName,
         authorNamePronunciation: this.getPronunciation(data.authorName),
@@ -315,7 +326,7 @@ export default {
       // B站官方表情
       if (data.emoticon !== null) {
         richContent.push({
-          type: constants.CONTENT_TYPE_IMAGE,
+          type: CONTENT_TYPE_IMAGE,
           text: data.content,
           url: data.emoticon,
         })
@@ -325,7 +336,7 @@ export default {
       // 没有文本表情，只能是纯文本
       if (this.config.emoticons.length === 0 && Object.keys(this.textEmoticons).length === 0) {
         richContent.push({
-          type: constants.CONTENT_TYPE_TEXT,
+          type: CONTENT_TYPE_TEXT,
           text: data.content,
         })
         return richContent
@@ -346,14 +357,14 @@ export default {
         // 加入之前的文本
         if (pos !== startPos) {
           richContent.push({
-            type: constants.CONTENT_TYPE_TEXT,
+            type: CONTENT_TYPE_TEXT,
             text: data.content.slice(startPos, pos),
           })
         }
 
         // 加入表情
         richContent.push({
-          type: constants.CONTENT_TYPE_IMAGE,
+          type: CONTENT_TYPE_IMAGE,
           text: matchEmoticon.keyword,
           url: matchEmoticon.url,
         })
@@ -363,7 +374,7 @@ export default {
       // 加入尾部的文本
       if (pos !== startPos) {
         richContent.push({
-          type: constants.CONTENT_TYPE_TEXT,
+          type: CONTENT_TYPE_TEXT,
           text: data.content.slice(startPos, pos),
         })
       }

@@ -1,5 +1,3 @@
-import i18n from '../../../languages'
-
 export const AUTHRO_TYPE_NORMAL = 0
 export const AUTHRO_TYPE_MEMBER = 1
 export const AUTHRO_TYPE_ADMIN = 2
@@ -12,20 +10,12 @@ export const AUTHOR_TYPE_TO_TEXT = [
   'owner', // 主播
 ]
 
-const GUARD_LEVEL_TO_TEXT_KEY = [
+export const GUARD_LEVEL_TO_TEXT_KEY = [
   '',
   'chat.guardLevel1',
   'chat.guardLevel2',
   'chat.guardLevel3',
 ]
-
-export function getShowGuardLevelText(guardLevel) {
-  const key = GUARD_LEVEL_TO_TEXT_KEY[guardLevel] || ''
-  if (key === '') {
-    return ''
-  }
-  return i18n.global.t(key)
-}
 
 export const MESSAGE_TYPE_TEXT = 0
 export const MESSAGE_TYPE_GIFT = 1
@@ -125,44 +115,3 @@ export const PRICE_CONFIGS = [
     pinTime: 0,
   },
 ]
-
-export function getPriceConfig(price) {
-  for (const config of PRICE_CONFIGS) {
-    if (price >= config.price) {
-      return config
-    }
-  }
-  return PRICE_CONFIGS[PRICE_CONFIGS.length - 1]
-}
-
-export function getShowContent(message) {
-  if (message.translation) {
-    return `${message.content}（${message.translation}）`
-  }
-  return message.content
-}
-
-export function getShowRichContent(message) {
-  const richContent = [...message.richContent]
-  if (message.translation) {
-    richContent.push({
-      type: CONTENT_TYPE_TEXT,
-      text: `（${message.translation}）`,
-    })
-  }
-  return richContent
-}
-
-export function getGiftShowContent(message, showGiftName) {
-  if (!showGiftName) {
-    return ''
-  }
-  return i18n.global.t('chat.sendGift', { giftName: message.giftName, num: message.num })
-}
-
-export function getShowAuthorName(message) {
-  if (message.authorNamePronunciation && message.authorNamePronunciation !== message.authorName) {
-    return `${message.authorName}(${message.authorNamePronunciation})`
-  }
-  return message.authorName
-}

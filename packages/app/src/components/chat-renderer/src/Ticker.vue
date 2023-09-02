@@ -1,10 +1,23 @@
 <script lang="ts">
-import { formatCurrency } from '../../../utils'
-import * as chatConfig from '../../../api/chatConfig.ts'
+import {
+  formatCurrency,
+} from '../../../utils'
+import {
+  DEFAULT_CONFIG,
+} from '../../../api/chatConfig'
 import ImgShadow from './ImgShadow.vue'
 import MembershipItem from './MembershipItem.vue'
 import PaidMessage from './PaidMessage.vue'
-import * as constants from './constants.ts'
+import {
+  MESSAGE_TYPE_GIFT,
+  MESSAGE_TYPE_MEMBER,
+} from './constants'
+import {
+  getGiftShowContent,
+  getPriceConfig,
+  getShowAuthorName,
+  getShowContent,
+} from './utils'
 
 export default {
   name: 'Ticker',
@@ -17,12 +30,12 @@ export default {
     messages: Array,
     showGiftName: {
       type: Boolean,
-      default: chatConfig.DEFAULT_CONFIG.showGiftName,
+      default: DEFAULT_CONFIG.showGiftName,
     },
   },
   data() {
     return {
-      MESSAGE_TYPE_MEMBER: constants.MESSAGE_TYPE_MEMBER,
+      MESSAGE_TYPE_MEMBER,
 
       curTime: new Date(),
       updateTimerId: window.setInterval(this.updateProgress, 1000),
@@ -49,10 +62,10 @@ export default {
       if (!this.pinnedMessage) {
         return ''
       }
-      if (this.pinnedMessage.type === constants.MESSAGE_TYPE_GIFT) {
-        return constants.getGiftShowContent(this.pinnedMessage, this.showGiftName)
+      if (this.pinnedMessage.type === MESSAGE_TYPE_GIFT) {
+        return getGiftShowContent(this.pinnedMessage, this.showGiftName)
       } else {
-        return constants.getShowContent(this.pinnedMessage)
+        return getShowContent(this.pinnedMessage)
       }
     },
   },
@@ -86,18 +99,18 @@ export default {
       }, 200)
     },
 
-    getShowAuthorName: constants.getShowAuthorName,
+    getShowAuthorName,
     needToShow(message) {
       const pinTime = this.getPinTime(message)
       return (new Date() - message.addTime) / (60 * 1000) < pinTime
     },
     getBgColor(message) {
       let color1, color2
-      if (message.type === constants.MESSAGE_TYPE_MEMBER) {
+      if (message.type === MESSAGE_TYPE_MEMBER) {
         color1 = 'rgba(15,157,88,1)'
         color2 = 'rgba(11,128,67,1)'
       } else {
-        const config = constants.getPriceConfig(message.price)
+        const config = getPriceConfig(message.price)
         color1 = config.colors.contentBg
         color2 = config.colors.headerBg
       }
@@ -111,22 +124,22 @@ export default {
       return `linear-gradient(90deg, ${color1}, ${color1} ${progress}%, ${color2} ${progress}%, ${color2})`
     },
     getColor(message) {
-      if (message.type === constants.MESSAGE_TYPE_MEMBER) {
+      if (message.type === MESSAGE_TYPE_MEMBER) {
         return 'rgb(255,255,255)'
       }
-      return constants.getPriceConfig(message.price).colors.header
+      return getPriceConfig(message.price).colors.header
     },
     getText(message) {
-      if (message.type === constants.MESSAGE_TYPE_MEMBER) {
+      if (message.type === MESSAGE_TYPE_MEMBER) {
         return this.$t('chat.tickerMembership')
       }
       return `CN¥${formatCurrency(message.price)}`
     },
     getPinTime(message) {
-      if (message.type === constants.MESSAGE_TYPE_MEMBER) {
+      if (message.type === MESSAGE_TYPE_MEMBER) {
         return 2
       }
-      return constants.getPriceConfig(message.price).pinTime
+      return getPriceConfig(message.price).pinTime
     },
     updateProgress() {
       // 更新进度

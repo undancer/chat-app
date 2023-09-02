@@ -4,14 +4,27 @@ import Ticker from './Ticker.vue'
 import TextMessage from './TextMessage.vue'
 import MembershipItem from './MembershipItem.vue'
 import PaidMessage from './PaidMessage.vue'
-import * as constants from './constants'
+import {
+  getGiftShowContent,
+  getShowAuthorName,
+  getShowContent,
+  getShowRichContent,
+} from './utils'
+import {
+  MESSAGE_TYPE_DEL,
+  MESSAGE_TYPE_GIFT,
+  MESSAGE_TYPE_MEMBER,
+  MESSAGE_TYPE_SUPER_CHAT,
+  MESSAGE_TYPE_TEXT,
+  MESSAGE_TYPE_UPDATE,
+} from './constants'
 
 // 只有要添加的消息需要平滑
 const NEED_SMOOTH_MESSAGE_TYPES = [
-  constants.MESSAGE_TYPE_TEXT,
-  constants.MESSAGE_TYPE_GIFT,
-  constants.MESSAGE_TYPE_MEMBER,
-  constants.MESSAGE_TYPE_SUPER_CHAT,
+  MESSAGE_TYPE_TEXT,
+  MESSAGE_TYPE_GIFT,
+  MESSAGE_TYPE_MEMBER,
+  MESSAGE_TYPE_SUPER_CHAT,
 ]
 // 发送消息时间间隔范围
 const MESSAGE_MIN_INTERVAL = 80
@@ -43,10 +56,10 @@ export default {
   },
   data() {
     return {
-      MESSAGE_TYPE_TEXT: constants.MESSAGE_TYPE_TEXT,
-      MESSAGE_TYPE_GIFT: constants.MESSAGE_TYPE_GIFT,
-      MESSAGE_TYPE_MEMBER: constants.MESSAGE_TYPE_MEMBER,
-      MESSAGE_TYPE_SUPER_CHAT: constants.MESSAGE_TYPE_SUPER_CHAT,
+      MESSAGE_TYPE_TEXT,
+      MESSAGE_TYPE_GIFT,
+      MESSAGE_TYPE_MEMBER,
+      MESSAGE_TYPE_SUPER_CHAT,
 
       messages: [], // 显示的消息
       paidMessages: [], // 固定在上方的消息
@@ -93,11 +106,11 @@ export default {
   },
   methods: {
     getGiftShowContent(message) {
-      return constants.getGiftShowContent(message, this.showGiftName)
+      return getGiftShowContent(message, this.showGiftName)
     },
-    getShowContent: constants.getShowContent,
-    getShowRichContent: constants.getShowRichContent,
-    getShowAuthorName: constants.getShowAuthorName,
+    getShowContent,
+    getShowRichContent,
+    getShowAuthorName,
 
     addMessage(message) {
       this.addMessages([message])
@@ -109,7 +122,7 @@ export default {
       content = content.trim().toLowerCase()
       let res = false
       this.forEachRecentMessage(5, (message) => {
-        if (message.type !== constants.MESSAGE_TYPE_TEXT) {
+        if (message.type !== MESSAGE_TYPE_TEXT) {
           return true
         }
         const messageContent = message.content.trim().toLowerCase()
@@ -136,7 +149,7 @@ export default {
     mergeSimilarGift(authorName, price, giftName, num) {
       let res = false
       this.forEachRecentMessage(5, (message) => {
-        if (message.type === constants.MESSAGE_TYPE_GIFT
+        if (message.type === MESSAGE_TYPE_GIFT
             && message.authorName === authorName
             && message.giftName === giftName
         ) {
@@ -173,7 +186,7 @@ export default {
     delMessages(ids) {
       this.enqueueMessages(ids.map(
         id => ({
-          type: constants.MESSAGE_TYPE_DEL,
+          type: MESSAGE_TYPE_DEL,
           id,
         }),
       ))
@@ -197,7 +210,7 @@ export default {
     },
     updateMessage(id, newValuesObj) {
       this.enqueueMessages([{
-        type: constants.MESSAGE_TYPE_UPDATE,
+        type: MESSAGE_TYPE_UPDATE,
         id,
         newValuesObj,
       }])
@@ -319,16 +332,16 @@ export default {
 
       for (const message of messageGroup) {
         switch (message.type) {
-          case constants.MESSAGE_TYPE_TEXT:
-          case constants.MESSAGE_TYPE_GIFT:
-          case constants.MESSAGE_TYPE_MEMBER:
-          case constants.MESSAGE_TYPE_SUPER_CHAT:
+          case MESSAGE_TYPE_TEXT:
+          case MESSAGE_TYPE_GIFT:
+          case MESSAGE_TYPE_MEMBER:
+          case MESSAGE_TYPE_SUPER_CHAT:
             this.handleAddMessage(message)
             break
-          case constants.MESSAGE_TYPE_DEL:
+          case MESSAGE_TYPE_DEL:
             this.handleDelMessage(message)
             break
-          case constants.MESSAGE_TYPE_UPDATE:
+          case MESSAGE_TYPE_UPDATE:
             this.handleUpdateMessage(message)
             break
         }
@@ -345,7 +358,7 @@ export default {
       }
       this.messagesBuffer.push(message)
 
-      if (message.type !== constants.MESSAGE_TYPE_TEXT) {
+      if (message.type !== MESSAGE_TYPE_TEXT) {
         this.paidMessages.unshift(message)
         const MAX_PAID_MESSAGE_NUM = 100
         if (this.paidMessages.length > MAX_PAID_MESSAGE_NUM) {
@@ -574,7 +587,7 @@ export default {
               />
               <PaidMessage
                 v-else-if="message.type === MESSAGE_TYPE_GIFT"
-                :key="message.id"
+                :key="`gift-${message.id}`"
                 class="style-scope yt-live-chat-item-list-renderer"
                 :time="message.time"
                 :avatar-url="message.avatarUrl"
@@ -584,7 +597,7 @@ export default {
               />
               <MembershipItem
                 v-else-if="message.type === MESSAGE_TYPE_MEMBER"
-                :key="message.id"
+                :key="`member-${message.id}`"
                 class="style-scope yt-live-chat-item-list-renderer"
                 :time="message.time"
                 :avatar-url="message.avatarUrl"
@@ -594,7 +607,7 @@ export default {
               />
               <PaidMessage
                 v-else-if="message.type === MESSAGE_TYPE_SUPER_CHAT"
-                :key="message.id"
+                :key="`super-chat-${message.id}`"
                 class="style-scope yt-live-chat-item-list-renderer"
                 :time="message.time"
                 :avatar-url="message.avatarUrl"

@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import { getTimeTextHourMin } from '../../../utils'
+import {
+  getTimeTextHourMin,
+} from '../../../utils'
 import ImgShadow from './ImgShadow.vue'
 import AuthorChip from './AuthorChip.vue'
 

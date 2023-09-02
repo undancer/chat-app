@@ -1,7 +1,12 @@
 <script lang="ts">
-import { formatCurrency, getTimeTextHourMin } from '../../../utils'
+import {
+  formatCurrency,
+  getTimeTextHourMin,
+} from '../../../utils'
 import ImgShadow from './ImgShadow.vue'
-import * as constants from './constants.ts'
+import {
+  getPriceConfig,
+} from './utils'
 
 export default {
   name: 'PaidMessage',
@@ -17,7 +22,7 @@ export default {
   },
   computed: {
     color() {
-      return constants.getPriceConfig(this.price).colors
+      return getPriceConfig(this.price).colors
     },
     priceText() {
       return `CN¥${formatCurrency(this.price)}`

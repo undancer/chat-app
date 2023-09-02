@@ -1,5 +1,14 @@
 import { getUuid4Hex } from '../../utils'
-import * as constants from '../../components/chat-renderer/src/constants.ts'
+import {
+  AUTHRO_TYPE_ADMIN,
+  AUTHRO_TYPE_MEMBER,
+  AUTHRO_TYPE_NORMAL,
+  AUTHRO_TYPE_OWNER,
+  MESSAGE_TYPE_GIFT,
+  MESSAGE_TYPE_MEMBER,
+  MESSAGE_TYPE_SUPER_CHAT,
+  MESSAGE_TYPE_TEXT,
+} from '../../components/chat-renderer/src/constants'
 import * as avatar from './avatar.ts'
 
 const NAMES = [
@@ -63,18 +72,18 @@ const EMOTICONS = [
 ]
 
 const AUTHOR_TYPES = [
-  { weight: 10, value: constants.AUTHRO_TYPE_NORMAL },
-  { weight: 5, value: constants.AUTHRO_TYPE_MEMBER },
-  { weight: 2, value: constants.AUTHRO_TYPE_ADMIN },
-  { weight: 1, value: constants.AUTHRO_TYPE_OWNER },
+  { weight: 10, value: AUTHRO_TYPE_NORMAL },
+  { weight: 5, value: AUTHRO_TYPE_MEMBER },
+  { weight: 2, value: AUTHRO_TYPE_ADMIN },
+  { weight: 1, value: AUTHRO_TYPE_OWNER },
 ]
 
 function randGuardInfo() {
   const authorType = randomChoose(AUTHOR_TYPES)
   let privilegeType
-  if (authorType === constants.AUTHRO_TYPE_MEMBER) {
+  if (authorType === AUTHRO_TYPE_MEMBER) {
     privilegeType = randInt(1, 3)
-  } else if (authorType === constants.AUTHRO_TYPE_ADMIN) {
+  } else if (authorType === AUTHRO_TYPE_ADMIN) {
     privilegeType = randInt(0, 3)
   } else {
     privilegeType = 0
@@ -101,7 +110,7 @@ const MESSAGE_GENERATORS = [
     weight: 20,
     value() {
       return {
-        type: constants.MESSAGE_TYPE_TEXT,
+        type: MESSAGE_TYPE_TEXT,
         message: {
           ...randGuardInfo(),
           avatarUrl: avatar.DEFAULT_AVATAR_URL,
@@ -126,7 +135,7 @@ const MESSAGE_GENERATORS = [
     weight: 5,
     value() {
       return {
-        type: constants.MESSAGE_TYPE_TEXT,
+        type: MESSAGE_TYPE_TEXT,
         message: {
           ...randGuardInfo(),
           avatarUrl: avatar.DEFAULT_AVATAR_URL,
@@ -151,7 +160,7 @@ const MESSAGE_GENERATORS = [
     weight: 1,
     value() {
       return {
-        type: constants.MESSAGE_TYPE_GIFT,
+        type: MESSAGE_TYPE_GIFT,
         message: {
           ...randomChoose(GIFT_INFO_LIST),
           id: getUuid4Hex(),
@@ -168,7 +177,7 @@ const MESSAGE_GENERATORS = [
     weight: 3,
     value() {
       return {
-        type: constants.MESSAGE_TYPE_SUPER_CHAT,
+        type: MESSAGE_TYPE_SUPER_CHAT,
         message: {
           id: getUuid4Hex(),
           avatarUrl: avatar.DEFAULT_AVATAR_URL,
@@ -186,7 +195,7 @@ const MESSAGE_GENERATORS = [
     weight: 1,
     value() {
       return {
-        type: constants.MESSAGE_TYPE_MEMBER,
+        type: MESSAGE_TYPE_MEMBER,
         message: {
           id: getUuid4Hex(),
           avatarUrl: avatar.DEFAULT_AVATAR_URL,
@@ -270,16 +279,16 @@ export default class ChatClientTest {
 
     const { type, message } = randomChoose(MESSAGE_GENERATORS)()
     switch (type) {
-      case constants.MESSAGE_TYPE_TEXT:
+      case MESSAGE_TYPE_TEXT:
         this.onAddText(message)
         break
-      case constants.MESSAGE_TYPE_GIFT:
+      case MESSAGE_TYPE_GIFT:
         this.onAddGift(message)
         break
-      case constants.MESSAGE_TYPE_MEMBER:
+      case MESSAGE_TYPE_MEMBER:
         this.onAddMember(message)
         break
-      case constants.MESSAGE_TYPE_SUPER_CHAT:
+      case MESSAGE_TYPE_SUPER_CHAT:
         this.onAddSuperChat(message)
         break
     }

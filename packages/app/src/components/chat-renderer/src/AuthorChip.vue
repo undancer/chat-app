@@ -1,6 +1,9 @@
 <script lang="ts">
 import AuthorBadge from './AuthorBadge.vue'
-import * as constants from './constants.ts'
+import {
+  AUTHOR_TYPE_TO_TEXT,
+  AUTHRO_TYPE_ADMIN,
+} from './constants'
 
 export default {
   name: 'AuthorChip',
@@ -15,12 +18,12 @@ export default {
   },
   data() {
     return {
-      AUTHRO_TYPE_ADMIN: constants.AUTHRO_TYPE_ADMIN,
+      AUTHRO_TYPE_ADMIN,
     }
   },
   computed: {
     authorTypeText() {
-      return constants.AUTHOR_TYPE_TO_TEXT[this.authorType]
+      return AUTHOR_TYPE_TO_TEXT[this.authorType]
     },
   },
 }

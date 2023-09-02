@@ -1,8 +1,14 @@
 <script lang="ts">
-import { getTimeTextHourMin } from '../../../utils'
+import {
+  getTimeTextHourMin,
+} from '../../../utils'
 import ImgShadow from './ImgShadow.vue'
 import AuthorChip from './AuthorChip.vue'
-import * as constants from './constants.ts'
+import {
+  AUTHOR_TYPE_TO_TEXT,
+  CONTENT_TYPE_IMAGE,
+  CONTENT_TYPE_TEXT,
+} from './constants'
 
 // HSL
 const REPEATED_MARK_COLOR_START = [210, 100.0, 62.5]
@@ -25,8 +31,8 @@ export default {
   },
   data() {
     return {
-      CONTENT_TYPE_TEXT: constants.CONTENT_TYPE_TEXT,
-      CONTENT_TYPE_IMAGE: constants.CONTENT_TYPE_IMAGE,
+      CONTENT_TYPE_TEXT,
+      CONTENT_TYPE_IMAGE,
     }
   },
   computed: {
@@ -34,7 +40,7 @@ export default {
       return getTimeTextHourMin(this.time)
     },
     authorTypeText() {
-      return constants.AUTHOR_TYPE_TO_TEXT[this.authorType]
+      return AUTHOR_TYPE_TO_TEXT[this.authorType]
     },
     repeatedMarkColor() {
       let color

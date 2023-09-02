@@ -1,5 +1,10 @@
 <script lang="ts">
-import * as constants from './constants.ts'
+import { useI18n } from 'vue-i18n'
+import {
+  getShowGuardLevelText,
+} from './utils'
+
+const { t } = useI18n()
 
 export default {
   name: 'AuthorBadge',
@@ -16,9 +21,9 @@ export default {
     },
     readableAuthorTypeText() {
       if (this.isAdmin) {
-        return this.$t('chat.moderator')
+        return t('chat.moderator')
       }
-      return constants.getShowGuardLevelText(this.privilegeType)
+      return getShowGuardLevelText(this.privilegeType)
     },
   },
 }

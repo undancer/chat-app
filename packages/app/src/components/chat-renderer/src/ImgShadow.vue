@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue-demi'
-import * as avatar from '../../../api/chat/avatar'
+import {
+  DEFAULT_AVATAR_URL,
+} from '../../../api/chat/avatar'
 
 interface Props {
   imgUrl: string
@@ -16,8 +18,8 @@ watch(() => showImgUrl.value, (value) => {
   showImgUrl.value = value
 })
 function onLoadError() {
-  if (showImgUrl.value !== avatar.DEFAULT_AVATAR_URL) {
-    showImgUrl.value = avatar.DEFAULT_AVATAR_URL
+  if (showImgUrl.value !== DEFAULT_AVATAR_URL) {
+    showImgUrl.value = DEFAULT_AVATAR_URL
   }
 }
 </script>
